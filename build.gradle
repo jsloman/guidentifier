@@ -1,0 +1,39 @@
+apply plugin: 'war'
+apply plugin: 'appengine'
+
+def appEmail  = "jonathans2@gmail.com"		
+
+def appengineVersion = "1.9.32"
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "com.google.appengine:gradle-appengine-plugin:1.9.32"
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+	appengineSdk "com.google.appengine:appengine-java-sdk:${appengineVersion}"
+	compile "javax.servlet:servlet-api:2.5"
+	compile "com.google.appengine:appengine-api-1.0-sdk:${appengineVersion}"
+	
+	compile "com.googlecode.objectify:objectify:5.1.4"
+	compile "jstl:jstl:1.2"
+}
+
+appengine {
+    httpPort = 8888
+    downloadSdk = true
+
+    appcfg { 
+        email = "${appEmail}"
+		//noCookies = true
+		//oauth2 = true
+    }
+}
