@@ -16,7 +16,7 @@ apply plugin: 'appengine'
 
 def appEmail  = "jonathans2@gmail.com"		
 
-def appengineVersion = "1.9.32"
+def appengineVersion = "1.9.34"
 
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
@@ -27,6 +27,8 @@ dependencies {
 	appengineSdk "com.google.appengine:appengine-java-sdk:${appengineVersion}"
 	compile "javax.servlet:servlet-api:2.5"
 	compile "com.google.appengine:appengine-api-1.0-sdk:${appengineVersion}"
+	compile "com.google.appengine:appengine-endpoints:${appengineVersion}"
+	compile "com.google.appengine:appengine-endpoints-deps:${appengineVersion}"
 	
 	compile "com.googlecode.objectify:objectify:5.1.12"
 	compile "jstl:jstl:1.2"
