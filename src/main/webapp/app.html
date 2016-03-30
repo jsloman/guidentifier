@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Guidentifier webapp</title>
+
+<script type="text/javascript">
+        function init() {
+        	window.alert('init')
+        	  // Loads the OAuth and helloworld APIs asynchronously, and triggers login
+        	  // when they have completed.
+        	  var apisToLoad;
+        	  var callback = function() {
+        	    if (--apisToLoad == 0) {
+        	      window.alert('loaded')
+        	      gapi.client.guidentifierApi.guidentifierApi.getTypes().execute(function(resp){ window.alert('got response' + JSON.stringify(resp, null, 2))})
+        	    }
+        	  }
+
+        	  apisToLoad = 1; // must match number of calls to gapi.client.load()
+        	  gapi.client.load('guidentifierApi', 'v1', callback, 'http://localhost:8888/_ah/api');
+        }
+    </script>
+</head>
+<body>
+Test test
+<script src="https://apis.google.com/js/client.js?onload=init">
+</script>
+</body>
+</html>

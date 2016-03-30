@@ -37,6 +37,7 @@ dependencies {
 appengine {
     httpPort = 8888
     downloadSdk = true
+ //   daemon = true
 
     appcfg { 
         email = "${appEmail}"
