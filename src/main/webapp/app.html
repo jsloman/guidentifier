@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Guidentifier webapp</title>
-
-<script type="text/javascript">
+  <head>
+    <meta charset="utf-8" />
+    <title>React Tutorial</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.8/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.8/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.5/marked.min.js"></script>
+    <script type="text/javascript">
         function init() {
-        	window.alert('init')
-        	  // Loads the OAuth and helloworld APIs asynchronously, and triggers login
-        	  // when they have completed.
+        	console.log('init')
         	  var apisToLoad;
         	  var callback = function() {
         	    if (--apisToLoad == 0) {
-        	      window.alert('loaded')
+        	      console.log('loaded')
+        	      window.dispatchEvent(new Event('google-loaded'));
         	      gapi.client.guidentifierApi.guidentifierApi.getTypes().execute(function(resp){ window.alert('got response' + JSON.stringify(resp, null, 2))})
         	    }
         	  }
@@ -21,10 +24,14 @@
         	  gapi.client.load('guidentifierApi', 'v1', callback, 'http://localhost:8888/_ah/api');
         }
     </script>
-</head>
-<body>
-Test test
-<script src="https://apis.google.com/js/client.js?onload=init">
-</script>
-</body>
+     <script src="https://apis.google.com/js/client.js?onload=init"></script>
+  </head>
+  <body>
+    <div id="content"></div>
+    <script type="text/babel" src="scripts/tutorial1.js"></script>
+    <script type="text/babel">
+      // To get started with this tutorial running your own code, simply remove
+      // the script tag loading scripts/example.js and start writing code here.
+    </script>
+  </body>
 </html>
