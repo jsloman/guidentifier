@@ -53,12 +53,13 @@ var CommentBox = React.createClass({
 	  getInitialState: function() {
 	    return {data: []};
 	  },
-	  renderGoogleLoginButton: function() {
-		    console.log('rendering google signin button')
-			gapi.client.guidentifierApi.guidentifierApi.getTypes().execute(function(data){ this.setState({data: data.items})});
-		  },
+	 // renderGoogleLoginButton: function() {
+	//	    console.log('rendering google signin button')
+			
+	//	  },
 	  componentDidMount: function() {
-		    window.addEventListener('google-loaded',this.renderGoogleLoginButton);
+		  gapi.client.guidentifierApi.guidentifierApi.getTypes().execute(function(data){ this.setState({data: data.items})});
+		  //window.addEventListener('google-loaded',this.renderGoogleLoginButton);
 		  },
 	  render: function() {
 	    return (
@@ -72,7 +73,3 @@ var CommentBox = React.createClass({
 	});
 
 
-ReactDOM.render(
-		  <CommentBox data={data} />,
-		  document.getElementById('content')
-		);

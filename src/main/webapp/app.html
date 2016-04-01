@@ -14,8 +14,12 @@
         	  var apisToLoad;
         	  var callback = function() {
         	    if (--apisToLoad == 0) {
-        	      console.log('loaded')
-        	      window.dispatchEvent(new Event('google-loaded'));
+        	      console.log('loaded');
+        	      ReactDOM.render(
+        	    		  <CommentBox data={data} />,
+        	    		  document.getElementById('content')
+        	    		);
+        	      //window.dispatchEvent(new Event('google-loaded'));
         	      gapi.client.guidentifierApi.guidentifierApi.getTypes().execute(function(resp){ window.alert('got response' + JSON.stringify(resp, null, 2))})
         	    }
         	  }
