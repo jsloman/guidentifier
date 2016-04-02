@@ -53,13 +53,13 @@ var CommentBox = React.createClass({
 	  getInitialState: function() {
 	    return {data: []};
 	  },
-	 // renderGoogleLoginButton: function() {
-	//	    console.log('rendering google signin button')
-			
-	//	  },
 	  componentDidMount: function() {
-		  gapi.client.guidentifierApi.guidentifierApi.getTypes().execute(function(data){ this.setState({data: data.items})});
-		  //window.addEventListener('google-loaded',this.renderGoogleLoginButton);
+			gapi.client.guidentifierApi.guidentifierApi.getTypes().execute(
+					function(mydata){ 
+						console.log('got data: ' + JSON.stringify(mydata)); 
+						this.setState({data: mydata.items})
+					}.bind(this)
+			);
 		  },
 	  render: function() {
 	    return (
@@ -72,4 +72,6 @@ var CommentBox = React.createClass({
 	  }
 	});
 
+// add it to global context so we can reference this from javascript.
+window.CommentBox = CommentBox;
 
