@@ -8,21 +8,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.5/marked.min.js"></script>
-    <script type="text/babel" src="scripts/tutorial1.js"></script>
+    <script type="text/babel" src="scripts/app.js"></script>
     <script type="text/javascript">
         function init() {
-        	console.log('init')
         	  var apisToLoad;
         	  var callback = function() {
-        	    if (--apisToLoad == 0) {
-        	      console.log('loaded');	 
-        	      //<CommentBox data={data} />,
-        		  //document.getElementById('content')
-        			//);
-
+        	    if (--apisToLoad == 0) { 
         	      ReactDOM.render(React.createElement(CommentBox), document.querySelector('#content'));
-        	      //window.dispatchEvent(new Event('google-loaded'));
-        	      //gapi.client.guidentifierApi.guidentifierApi.getTypes().execute(function(resp){ window.alert('got response' + JSON.stringify(resp, null, 2))})
         	    }
         	  }
 
