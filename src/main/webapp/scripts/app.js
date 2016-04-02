@@ -91,7 +91,7 @@ var TypeBox = React.createClass({
 	render: function() {
 	    return (
 	      <div className="typeBox">
-	        <h1>Comments</h1>
+	        <h1>Types</h1>
 	        <TypeList data={this.state.data} />
 	        <TypeForm onCommentSubmit={this.handleTypeSubmit} />
 	      </div>
