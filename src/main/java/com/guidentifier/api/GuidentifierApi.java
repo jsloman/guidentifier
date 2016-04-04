@@ -2,9 +2,12 @@ package com.guidentifier.api;
 
 import java.util.List;
 
+import javax.inject.Named;
+
 import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiNamespace;
 import com.guidentifier.dao.DAO;
+import com.guidentifier.model.Family;
 import com.guidentifier.model.Type;
 
 /** An endpoint class we are exposing */
@@ -25,6 +28,11 @@ public class GuidentifierApi {
 	
 	public List<Type> getTypes() {
 		return dao.getTypes();
+	}
+	
+	public List<Family> getFamilies(@Named("typeId") String typeId) {
+		Type type = dao.getType(typeId);
+		return dao.getFamiliesList(type);
 	}
 
 }

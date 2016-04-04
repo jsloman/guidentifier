@@ -3,11 +3,14 @@ var Type = React.createClass({
 		var rawMarkup = marked(this.props.children.toString(), {sanitize: true});
 		return { __html: rawMarkup };
 	},
-
+	handleClick: function(e) {
+		console.log('Got handleClick: ' + this.props.id);
+	    this.props.onTypeSelect(this.props.id);
+	},
 	render: function() {
 		return (
 				<div className="type">
-					<h2 className="typeName">
+					<h2 className="typeName" onClick={this.handleClick}>
 						{this.props.name}
 					</h2>
 				</div>
@@ -17,13 +20,13 @@ var Type = React.createClass({
 
 var TypeList = React.createClass({
 	render: function() {
-	    var typeNodes = this.props.data.map(function(type) {
+	    var typeNodes = this.props.types.map(function(type) {
 	      return (
-	        <Type key={type.id} name={type.name}>
+	        <Type key={type.id} id={type.id} name={type.name} onTypeSelect={this.props.onTypeSelect}>
 	          {type.name}
 	        </Type>
 	      );
-	    });
+	    }.bind(this));
 	    return (
 	      <div className="typeList">
 	        {typeNodes}
@@ -57,44 +60,78 @@ var TypeForm = React.createClass({
 	          value={this.state.name}
 	          onChange={this.handleNameChange}
 	        />
-	        <input type="submit" value="Post" />
+	        <input type="submit" value="Add type" />
 	      </form>
 	    );
 	}
 });
 
+var GuideBox = React.createClass({
+	render: function() {
+	    var familyNodes = this.props.families.map(function(family) {
+	      return (
+	    		<div className="family">
+					{family.name}
+				</div>
+	      );
+	    });
+	    return (
+	      <div className="guideBox">
+	        <h1>{this.props.type}</h1>
+	        <div className="familyList">
+	          {familyNodes}
+	        </div>
+	      </div>
+	    );
+	}
+});
 
 var TypeBox = React.createClass({
-	loadCommentsFromServer: function() {
+	loadTypesFromServer: function() {
 		gapi.client.guidentifierApi.guidentifierApi.getTypes().execute(
-			function(mydata) { 
-				console.log('got data: ' + JSON.stringify(mydata)); 
-				this.setState({data: mydata.items})
+			function(types) { 
+				console.log('got data: ' + JSON.stringify(types)); 
+				this.setState({types: types.items})
 			}.bind(this)
 		);
+	},
+	loadFamiliesFromServer: function() {
+		if (this.state.type != null) {
+			gapi.client.guidentifierApi.guidentifierApi.getFamilies(this.state.type).execute(
+					function(families) { 
+						console.log('got family data: ' + JSON.stringify(families)); 
+						this.setState({families: families.items})
+					}.bind(this)
+				);		
+		}	
 	},
 	handleTypeSubmit: function(typeObj) {
 		console.log(' adding type: ' + typeObj + ' which is: ' + JSON.stringify(typeObj));
 	    gapi.client.guidentifierApi.guidentifierApi.addType(typeObj).execute(
 			   function(mydata) {
 				   console.log('added type: ' + JSON.stringify(mydata));
-				   this.loadCommentsFromServer();
+				   this.loadTypesFromServer();
 			   }.bind(this)
 	   );
 	},
+	handleTypeSelect: function(type) {
+	    this.setState({type: type});
+	    this.loadFamiliesFromServer();
+	},	
 	getInitialState: function() {
-		return {data: []};
+		return {types: [], type: null, families: []};
 	},
 	componentDidMount: function() {
-	    this.loadCommentsFromServer();
+	    this.loadTypesFromServer();
 	},
 	render: function() {
 	    return (
 	      <div className="typeBox">
 	        <h1>Types</h1>
-	        <TypeList data={this.state.data} />
+	        <TypeList types={this.state.types} onTypeSelect={this.handleTypeSelect}/>
 	        <TypeForm onCommentSubmit={this.handleTypeSubmit} />
-	      </div>
+	        <GuideBox type={this.state.type} families={this.state.families}/>
+	        </div>
 	    );
 	}
 });
