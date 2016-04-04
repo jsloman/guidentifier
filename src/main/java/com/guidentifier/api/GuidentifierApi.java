@@ -34,5 +34,12 @@ public class GuidentifierApi {
 		Type type = dao.getType(typeId);
 		return dao.getFamiliesList(type);
 	}
+	
+	public Family addFamily(@Named("typeId") String typeId, @Named("familyName") String familyName) {
+		Type type = dao.getType(typeId);
+		Family family = new Family(type, familyName);
+		dao.add(family);
+		return family;
+	}
 
 }

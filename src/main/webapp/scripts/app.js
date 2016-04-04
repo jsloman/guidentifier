@@ -4,14 +4,13 @@ var Type = React.createClass({
 		return { __html: rawMarkup };
 	},
 	handleClick: function(e) {
-		console.log('Got handleClick: ' + this.props.id);
-	    this.props.onTypeSelect(this.props.id);
+	    this.props.onTypeSelect(this.props.type.id);
 	},
 	render: function() {
 		return (
 				<div className="type">
 					<h2 className="typeName" onClick={this.handleClick}>
-						{this.props.name}
+						{this.props.type.name}
 					</h2>
 				</div>
 		);
@@ -22,7 +21,7 @@ var TypeList = React.createClass({
 	render: function() {
 	    var typeNodes = this.props.types.map(function(type) {
 	      return (
-	        <Type key={type.id} id={type.id} name={type.name} onTypeSelect={this.props.onTypeSelect}>
+	        <Type key={type.id} type={type} onTypeSelect={this.props.onTypeSelect}>
 	          {type.name}
 	        </Type>
 	      );
@@ -48,7 +47,7 @@ var TypeForm = React.createClass({
 		if (!name) {
 			return;
 		}
-	    this.props.onCommentSubmit({name: name});
+	    this.props.onTypeSubmit({name: name});
 		this.setState({name: ''});
 	},
 	render: function() {
@@ -66,21 +65,59 @@ var TypeForm = React.createClass({
 	}
 });
 
-var GuideBox = React.createClass({
+var FamilyForm = React.createClass({
+	getInitialState: function() {
+	  return {name: ''};
+	},
+	handleNameChange: function(e) {
+	  this.setState({name: e.target.value});
+	},
+	handleSubmit: function(e) {
+		e.preventDefault();
+		var name = this.state.name.trim();
+		if (!name) {
+			return;
+		}
+	    this.props.onFamilySubmit(this.props.typeId, name);
+		this.setState({name: ''});
+	},
+	render: function() {
+		if (this.props.typeId == null) {
+			return (
+					<div className="emptyFamilyForm"></div>
+			);
+		}
+			
+		return (
+	      <form className="familyForm" onSubmit={this.handleSubmit}>
+	        <input
+	          type="text"
+	          placeholder="Family name"
+	          value={this.state.name}
+	          onChange={this.handleNameChange}
+	        />
+	        <input type="submit" value="Add family" />
+	      </form>
+	    );
+	}
+});
+
+var FamilyBox = React.createClass({
 	render: function() {
 	    var familyNodes = this.props.families.map(function(family) {
 	      return (
-	    		<div className="family">
+	    		<div key={family.id} className="family">
 					{family.name}
 				</div>
 	      );
 	    });
 	    return (
-	      <div className="guideBox">
-	        <h1>{this.props.type}</h1>
+	      <div className="familyBox">
+	        <h1>Families</h1>
 	        <div className="familyList">
 	          {familyNodes}
 	        </div>
+	        <FamilyForm typeId={this.props.typeId} onFamilySubmit={this.props.onFamilySubmit}/>
 	      </div>
 	    );
 	}
@@ -95,9 +132,9 @@ var TypeBox = React.createClass({
 			}.bind(this)
 		);
 	},
-	loadFamiliesFromServer: function() {
-		if (this.state.type != null) {
-			gapi.client.guidentifierApi.guidentifierApi.getFamilies(this.state.type).execute(
+	loadFamiliesFromServer: function(typeId) {
+		if (typeId != null) {
+			gapi.client.guidentifierApi.guidentifierApi.getFamilies({typeId: typeId}).execute(
 					function(families) { 
 						console.log('got family data: ' + JSON.stringify(families)); 
 						this.setState({families: families.items})
@@ -108,18 +145,27 @@ var TypeBox = React.createClass({
 	handleTypeSubmit: function(typeObj) {
 		console.log(' adding type: ' + typeObj + ' which is: ' + JSON.stringify(typeObj));
 	    gapi.client.guidentifierApi.guidentifierApi.addType(typeObj).execute(
-			   function(mydata) {
-				   console.log('added type: ' + JSON.stringify(mydata));
+			   function(response) {
+				   console.log('added type: ' + JSON.stringify(response));
 				   this.loadTypesFromServer();
 			   }.bind(this)
 	   );
 	},
-	handleTypeSelect: function(type) {
-	    this.setState({type: type});
-	    this.loadFamiliesFromServer();
+	handleFamilySubmit: function(typeId, familyName) {
+		console.log(' adding family: ' + familyName);
+	    gapi.client.guidentifierApi.guidentifierApi.addFamily({typeId: typeId, familyName: familyName}).execute(
+			   function(response) {
+				   console.log('added family: ' + JSON.stringify(response));
+				   this.loadFamiliesFromServer(this.state.typeId);
+			   }.bind(this)
+	   );
+	},
+	handleTypeSelect: function(typeId) {
+	    this.setState({typeId: typeId});
+	    this.loadFamiliesFromServer(typeId);
 	},	
 	getInitialState: function() {
-		return {types: [], type: null, families: []};
+		return {types: [], typeId: null, families: []};
 	},
 	componentDidMount: function() {
 	    this.loadTypesFromServer();
@@ -129,8 +175,8 @@ var TypeBox = React.createClass({
 	      <div className="typeBox">
 	        <h1>Types</h1>
 	        <TypeList types={this.state.types} onTypeSelect={this.handleTypeSelect}/>
-	        <TypeForm onCommentSubmit={this.handleTypeSubmit} />
-	        <GuideBox type={this.state.type} families={this.state.families}/>
+	        <TypeForm onTypeSubmit={this.handleTypeSubmit} />
+	        <FamilyBox typeId={this.state.typeId} families={this.state.families} onFamilySubmit={this.handleFamilySubmit}/>
 	        </div>
 	    );
 	}
