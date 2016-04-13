@@ -11,9 +11,9 @@ repositories {
     mavenCentral()
 }
 
-apply plugin: 'eclipse-wtp'
 apply plugin: 'war'
 apply plugin: 'appengine'
+apply plugin: 'eclipse-wtp'
 
 def appEmail  = "jonathans2@gmail.com"		
 
@@ -45,4 +45,12 @@ appengine {
 		//noCookies = true
 		oauth2 = true
     }
+}
+
+eclipse {
+	wtp {
+		component {
+			
+		}
+	}
 }
