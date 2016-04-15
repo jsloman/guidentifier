@@ -35,10 +35,18 @@ dependencies {
 	compile "jstl:jstl:1.2"
 }
 
+sourceSets {
+    main {
+        resources {
+            srcDir 'src/main/webapp'
+        }
+    }
+}
+
 appengine {
     httpPort = 8888
     downloadSdk = true
- //   daemon = true
+    daemon = true
 
     appcfg { 
         email = "${appEmail}"
