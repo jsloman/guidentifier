@@ -7,6 +7,10 @@ buildscript {
     }
 }
 
+//plugins {
+//  id "com.moowork.gulp" version "0.12"
+//}
+
 repositories {
     mavenCentral()
 }
@@ -15,6 +19,9 @@ apply plugin: 'war'
 apply plugin: 'appengine'
 apply plugin: 'eclipse-wtp'
 
+// apply plugin: 'com.moowork.gulp'
+
+
 def appEmail  = "jonathans2@gmail.com"		
 
 def appengineVersion = "1.9.34"
@@ -22,7 +29,24 @@ def appengineVersion = "1.9.34"
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
 
+//gulp {
+    // Set the directory where gulpfile.js should be found
+//    workDir = file("${project.projectDir}")
 
+    // Whether colors should output on the terminal
+//    colors = true
+
+    // Whether output from Gulp should be buffered - useful when running tasks in parallel
+//    bufferOutput = false
+//}
+
+//node {
+    // Version of node to use.
+//    version = '0.10.22'
+
+    // Enabled the automatic download. False is the default (for now).
+//    download = true
+//}
 
 dependencies {
 	appengineSdk "com.google.appengine:appengine-java-sdk:${appengineVersion}"
@@ -47,6 +71,8 @@ appengine {
     httpPort = 8888
     downloadSdk = true
     daemon = true
+    
+    jvmFlags = ['-Ddatastore.backing_store="local-data/local_db.bin']
 
     appcfg { 
         email = "${appEmail}"
