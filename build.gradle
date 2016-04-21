@@ -72,7 +72,7 @@ appengine {
     downloadSdk = true
     daemon = true
     
-    jvmFlags = ['-Ddatastore.backing_store="local-data/local_db.bin']
+    jvmFlags = ['-Ddatastore.backing_store="../../local-data/local_db.bin"']
 
     appcfg { 
         email = "${appEmail}"

@@ -1,5 +1,5 @@
 "use strict";
-
+  
 var FamilyForm = React.createClass({
 	getInitialState: function() {
 	  return {name: ''};

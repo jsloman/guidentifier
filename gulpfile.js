@@ -9,9 +9,9 @@ var path = {
 		  ALL: ['src/main/webapp/js/*.js', 'src/main/webapp/js/**/*.js', 'src/main/webapp/app.html'],
 		  JS: ['src/main/webapp/js/*.js', 'src/main/webapp/js/**/*.js'],
 		  MINIFIED_OUT: 'build.min.js',
-		  DEST_SRC: 'build/exploded-app',
+		  DEST_SRC: 'build/exploded-app/js',
 		  DEST_BUILD: 'dist/build',
-		  DEST: 'dist'
+		  DEST: 'build/exploded-app'
 		};
 
 gulp.task('transform', function(){
