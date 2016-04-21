@@ -9,7 +9,7 @@ var path = {
 		  ALL: ['src/main/webapp/js/*.js', 'src/main/webapp/js/**/*.js', 'src/main/webapp/app.html'],
 		  JS: ['src/main/webapp/js/*.js', 'src/main/webapp/js/**/*.js'],
 		  MINIFIED_OUT: 'build.min.js',
-		  DEST_SRC: 'dist/src',
+		  DEST_SRC: 'build/exploded-app',
 		  DEST_BUILD: 'dist/build',
 		  DEST: 'dist'
 		};
