@@ -8,6 +8,7 @@ public class Type {
 	@Id Long id;
 	String name;
 	
+	@SuppressWarnings("unused")
 	private Type() {
 	}
 	

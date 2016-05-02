@@ -14,6 +14,7 @@ public class Species {
 	@Index @Load Ref<Family> family;
 	
 	
+	@SuppressWarnings("unused")
 	private Species() {
 	}
 	

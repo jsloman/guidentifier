@@ -16,6 +16,7 @@ public class FamilyInfo {
 	@Index @Load Ref<Family> family;
 	
 	
+	@SuppressWarnings("unused")
 	private FamilyInfo() {
 	}
 	

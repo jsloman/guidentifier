@@ -16,6 +16,7 @@ public class SpeciesInfo {
 	@Index @Load Ref<Species> species;
 	
 	
+	@SuppressWarnings("unused")
 	private SpeciesInfo() {
 	}
 	

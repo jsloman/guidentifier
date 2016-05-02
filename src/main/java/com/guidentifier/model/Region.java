@@ -12,6 +12,7 @@ public class Region {
 	String name;
 	@Index @Load Ref<Region> parent;
 	
+	@SuppressWarnings("unused")
 	private Region() {
 	}
 	

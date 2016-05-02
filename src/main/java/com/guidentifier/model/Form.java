@@ -12,6 +12,7 @@ public class Form {
 	String name;
 	@Index @Load Ref<Type> type;
 	
+	@SuppressWarnings("unused")
 	private Form() {
 	}
 	

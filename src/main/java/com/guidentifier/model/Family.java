@@ -13,6 +13,7 @@ public class Family {
 	@Index @Load Ref<Type> type;
 	@Index @Load Ref<Family> parent;
 	
+	@SuppressWarnings("unused")
 	private Family() {
 	}
 	
