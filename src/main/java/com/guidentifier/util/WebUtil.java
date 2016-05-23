@@ -3,9 +3,9 @@ package com.guidentifier.util;
 import java.util.List;
 
 import com.guidentifier.dao.DAO;
-import com.guidentifier.model.Family;
+import com.guidentifier.model.Group;
 import com.guidentifier.model.Region;
-import com.guidentifier.model.Type;
+import com.guidentifier.model.Category;
 
 public class WebUtil {
 	public static String encodeForWeb(String str) {
@@ -64,9 +64,9 @@ public class WebUtil {
 		return sb.toString();
 	}
 	
-	static void showFamilyChildren(StringBuffer sb, Family parent, List<Family>allFamilies, Region r, long currentId) {
+	static void showFamilyChildren(StringBuffer sb, Group parent, List<Group>allFamilies, Region r, long currentId) {
 		boolean first = true;
-		for (Family f: allFamilies) {
+		for (Group f: allFamilies) {
 			if (f.getParent() != null &&  f.getParent().getId() == parent.getId().longValue()) {
 				if (first) {
 					sb.append("<ul>");
@@ -87,11 +87,11 @@ public class WebUtil {
 		}
 	}
 	
-	public static String showFamilies(DAO dao, Type t, Region r, long currentId) {
-		List<Family> allFamilies=  dao.getFamiliesList(t);
+	public static String showFamilies(DAO dao, Category t, Region r, long currentId) {
+		List<Group> allFamilies=  dao.getFamiliesList(t);
 		StringBuffer sb = new StringBuffer();
 		sb.append("<ul>");
-		for (Family f: allFamilies) {
+		for (Group f: allFamilies) {
 			if (f.getParent() == null) {
 				if (f.getId().longValue() == currentId) {
 					sb.append("<li> <b>").append(f.getName()).append("</b>");		

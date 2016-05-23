@@ -7,75 +7,75 @@ import com.googlecode.objectify.ObjectifyService;
 import com.guidentifier.model.FamilyInfo;
 import com.guidentifier.model.Form;
 import com.guidentifier.model.Region;
-import com.guidentifier.model.Species;
+import com.guidentifier.model.Thing;
 import com.guidentifier.model.SpeciesInfo;
-import com.guidentifier.model.Type;
-import com.guidentifier.model.Family;
+import com.guidentifier.model.Category;
+import com.guidentifier.model.Group;
 import java.util.List;
 import java.util.ArrayList;
 
 public class DAO {
 	static {
-		ObjectifyService.register(Type.class);
-		ObjectifyService.register(Family.class);
+		ObjectifyService.register(Category.class);
+		ObjectifyService.register(Group.class);
 		ObjectifyService.register(Form.class);
-		ObjectifyService.register(Species.class);
+		ObjectifyService.register(Thing.class);
 		ObjectifyService.register(FamilyInfo.class);
 		ObjectifyService.register(SpeciesInfo.class);
 		ObjectifyService.register(Region.class);
 	}
 	
-	public List<Type> getTypes() {
-		return ofy().load().type(Type.class).list();
+	public List<Category> getTypes() {
+		return ofy().load().type(Category.class).list();
 	}
 	
-	public void add(Type t) {
+	public void add(Category t) {
 		ofy().save().entity(t).now();
 	}
 	
-	public Type getType(String idStr) {
+	public Category getType(String idStr) {
 		try {
 			Long id = Long.parseLong(idStr);
-			return ofy().load().type(Type.class).id(id).now();
+			return ofy().load().type(Category.class).id(id).now();
 		} catch (NumberFormatException e) {
 			return null;
 		}
 	}
 	
-	public Type getType(Key<Type> key) {
+	public Category getType(Key<Category> key) {
 		return ofy().load().key(key).now();
 	}
 	
-	public Family getFamily(String idStr) {
+	public Group getFamily(String idStr) {
 		try {
 			Long id = Long.parseLong(idStr);
-			return ofy().load().type(Family.class).id(id).now();
+			return ofy().load().type(Group.class).id(id).now();
 		} catch (NumberFormatException e) {
 			return null;
 		}
 	}
 	
-	public Iterable<Family> getFamilies(Type t) {
-		return ofy().load().type(Family.class).filter("type", t);
+	public Iterable<Group> getFamilies(Category t) {
+		return ofy().load().type(Group.class).filter("type", t);
 	}
 	
-	public List<Family> getFamiliesList(Type t) {
-		return ofy().load().type(Family.class).filter("type", t).list();
+	public List<Group> getFamiliesList(Category t) {
+		return ofy().load().type(Group.class).filter("type", t).list();
 	}
 	
-	public Iterable<Family> getFamilies(Family f) {
-		return ofy().load().type(Family.class).filter("parent =", f);
+	public Iterable<Group> getFamilies(Group f) {
+		return ofy().load().type(Group.class).filter("parent =", f);
 	}
 	
-	public Family getFamily(Key<Family> key) {
+	public Group getFamily(Key<Group> key) {
 		return ofy().load().key(key).now();
 	}
 	
-	public void add(Family f) {
+	public void add(Group f) {
 		ofy().save().entity(f).now();
 	}
 	
-	public Iterable<Form> getForms(Type t) {
+	public Iterable<Form> getForms(Category t) {
 		return ofy().load().type(Form.class).filter("type", t);
 	}
 	
@@ -83,28 +83,28 @@ public class DAO {
 		ofy().save().entity(f).now();
 	}
 	
-	public Iterable<Species> getSpecies(Family f) {
-		return ofy().load().type(Species.class).filter("family", f);
+	public Iterable<Thing> getSpecies(Group f) {
+		return ofy().load().type(Thing.class).filter("family", f);
 	}
 	
-	public Species getSpecies(String idStr) {
+	public Thing getSpecies(String idStr) {
 		try {
 			Long id = Long.parseLong(idStr);
-			return ofy().load().type(Species.class).id(id).now();
+			return ofy().load().type(Thing.class).id(id).now();
 		} catch (NumberFormatException e) {
 			return null;
 		}	
 	}
 	
-	public FamilyInfo getFamilyInfo(Family f) {
+	public FamilyInfo getFamilyInfo(Group f) {
 		return ofy().load().type(FamilyInfo.class).filter("family", f).first().now();
 	}
 	
-	public SpeciesInfo getSpeciesInfo(Species s) {
+	public SpeciesInfo getSpeciesInfo(Thing s) {
 		return ofy().load().type(SpeciesInfo.class).filter("species", s).first().now();
 	}
 	
-	public void add(Species s) {
+	public void add(Thing s) {
 		ofy().save().entity(s).now();
 	}
 	
@@ -116,9 +116,9 @@ public class DAO {
 		ofy().save().entity(si).now();
 	}
 	
-	public List<Family> getParents(Family f) {
-		List<Family> ret = new ArrayList<Family>();
-		Family fam = f;
+	public List<Group> getParents(Group f) {
+		List<Group> ret = new ArrayList<Group>();
+		Group fam = f;
 		while (fam.getParent() != null) {
 			fam = fam.getParent();
 			ret.add(0, fam);

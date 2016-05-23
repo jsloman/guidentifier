@@ -7,40 +7,49 @@ import com.googlecode.objectify.annotation.Load;
 import com.googlecode.objectify.Ref;
 
 @Entity
-public class SpeciesInfo {
-	@Id Long id;
+public class Thing {
+	@Id String name;
+	@Index @Load Ref<Category> category;
+	@Index @Load Ref<Group> group;
+	
 	String description;
 	String image;
 	String wikipediaURL;
 	
-	@Index @Load Ref<Species> species;
-	
-	
 	@SuppressWarnings("unused")
-	private SpeciesInfo() {
+	private Thing() {
 	}
 	
-	public SpeciesInfo(Species s) {
-		species = Ref.create(s);
-		id = null;
+	public Thing(Group group, String name) {
+		this.group = Ref.create(group);;
+		category = Ref.create(group.getCategory());
+		this.name = name;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 	
-	public Long getId() {
-		return id;
+	public Category getCategory() {
+		return category.get();
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setCategory(Category category) {
+		this.category = Ref.create(category);
 	}
 
-	public Species getSpecies() {
-		return species.get();
+	public Group getGroup() {
+		return group.get();
 	}
 
-	public void setSpecies(Species species) {
-		this.species = Ref.create(species);
+	public void setGroup(Group group) {
+		this.group = Ref.create(group);
 	}
-
+	
 	public String getDescription() {
 		return description;
 	}

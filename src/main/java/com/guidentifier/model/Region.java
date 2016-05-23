@@ -8,9 +8,10 @@ import com.googlecode.objectify.Ref;
 
 @Entity
 public class Region {
-	@Id Long id;
-	String name;
+	@Id String name;
 	@Index @Load Ref<Region> parent;
+	
+	/* TODO should a region possibly be relevant for a specific category only? */
 	
 	@SuppressWarnings("unused")
 	private Region() {
@@ -19,21 +20,11 @@ public class Region {
 	public Region(String name) {
 		this.name = name;
 		parent = null;
-		id = null;
 	}
 	
-	public Region(Region r, String name) {
-		parent = Ref.create(r);
+	public Region(Region region, String name) {
+		parent = Ref.create(region);
 		this.name = name;
-		id = null;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public String getName() {

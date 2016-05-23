@@ -7,27 +7,17 @@ import com.googlecode.objectify.annotation.Load;
 import com.googlecode.objectify.Ref;
 
 @Entity
-public class Form {
-	@Id Long id;
-	String name;
-	@Index @Load Ref<Type> type;
+public class IdentifierOption {
+	@Id String name;
+	@Index @Load Ref<Identifier> identifier;
 	
 	@SuppressWarnings("unused")
-	private Form() {
+	private IdentifierOption() {
 	}
 	
-	public Form(Type t, String name) {
-		type = Ref.create(t);
+	public IdentifierOption(Identifier identifier, String name) {
+		this.identifier = Ref.create(identifier);;
 		this.name = name;
-		id = null;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public String getName() {
@@ -38,11 +28,11 @@ public class Form {
 		this.name = name;
 	}
 	
-	public Type getType() {
-		return type.get();
+	public Identifier getIdentifier() {
+		return identifier.get();
 	}
 
-	public void setType(Type type) {
-		this.type = Ref.create(type);
-	}	
+	public void setIdentifier(Identifier identifier) {
+		this.identifier = Ref.create(identifier);
+	}
 }

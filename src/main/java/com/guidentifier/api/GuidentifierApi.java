@@ -7,8 +7,8 @@ import javax.inject.Named;
 import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiNamespace;
 import com.guidentifier.dao.DAO;
-import com.guidentifier.model.Family;
-import com.guidentifier.model.Type;
+import com.guidentifier.model.Group;
+import com.guidentifier.model.Category;
 
 /** An endpoint class we are exposing */
 @Api(name = "guidentifierApi", version = "v1", namespace = @ApiNamespace(ownerDomain = "guidentifier.com",
@@ -21,23 +21,23 @@ public class GuidentifierApi {
 		dao = new DAO();
 	}
 	
-	public Type addType(Type type) {
+	public Category addType(Category type) {
 		dao.add(type);
 		return type;
 	}
 	
-	public List<Type> getTypes() {
+	public List<Category> getTypes() {
 		return dao.getTypes();
 	}
 	
-	public List<Family> getFamilies(@Named("typeId") String typeId) {
-		Type type = dao.getType(typeId);
+	public List<Group> getFamilies(@Named("typeId") String typeId) {
+		Category type = dao.getType(typeId);
 		return dao.getFamiliesList(type);
 	}
 	
-	public Family addFamily(@Named("typeId") String typeId, @Named("familyName") String familyName) {
-		Type type = dao.getType(typeId);
-		Family family = new Family(type, familyName);
+	public Group addFamily(@Named("typeId") String typeId, @Named("familyName") String familyName) {
+		Category type = dao.getType(typeId);
+		Group family = new Group(type, familyName);
 		dao.add(family);
 		return family;
 	}

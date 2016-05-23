@@ -4,25 +4,16 @@ import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 
 @Entity
-public class Type {
-	@Id Long id;
-	String name;
+public class Category {
+	@Id String name;
 	
 	@SuppressWarnings("unused")
-	private Type() {
+	private Category() {
 	}
 	
-	public Type(String name) {
+	public Category(String name)
+	{
 		this.name = name;
-		id = null;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 	
 	public String getName() {
@@ -31,6 +22,5 @@ public class Type {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-	
+	}	
 }
