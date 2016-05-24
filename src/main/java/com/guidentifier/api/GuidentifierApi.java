@@ -21,25 +21,25 @@ public class GuidentifierApi {
 		dao = new DAO();
 	}
 	
-	public Category addType(Category type) {
-		dao.add(type);
+	public Category addCategory(Category type) {
+		dao.addCategory(type);
 		return type;
 	}
 	
-	public List<Category> getTypes() {
-		return dao.getTypes();
+	public List<Category> getCategories() {
+		return dao.getCategories();
 	}
 	
-	public List<Group> getFamilies(@Named("typeId") String typeId) {
-		Category type = dao.getType(typeId);
-		return dao.getFamiliesList(type);
+	public List<Group> getGroups(@Named("categoryName") String name) {
+		Category category = dao.getCategory(name);
+		return dao.getGroupList(category);
 	}
 	
-	public Group addFamily(@Named("typeId") String typeId, @Named("familyName") String familyName) {
-		Category type = dao.getType(typeId);
-		Group family = new Group(type, familyName);
-		dao.add(family);
-		return family;
+	public Group addGroup(@Named("categoryName") String categoryName, @Named("groupName") String groupName) {
+		Category category = dao.getCategory(categoryName);
+		Group group = new Group(category, groupName);
+		dao.addGroup(group);
+		return group;
 	}
 
 }

@@ -18,16 +18,16 @@ public class WebUtil {
 	private static void showRegionChildren(StringBuffer sb, Region parent, List<Region>allRegions, Region current, String prefix, String postfix) {
 		boolean first = true;
 		for (Region r: allRegions) {
-			if (r.getParent() != null &&  r.getParent().getId() == parent.getId().longValue()) {
+			if (r.getParent() != null &&  r.getParent().getName().equals(parent.getName())) {
 				if (first) {
 					sb.append("<ul>");
 					first = false;
 				}
-				if (current != null && current.getId() == r.getId().longValue()) {
+				if (current != null && current.getName().equals(r.getName())) {
 					sb.append("<li> <b>").append(r.getName()).append("</b>");	
 				} else {
 					sb.append("<li> <a href=\"/").append(prefix).
-						append(r.getId()).append(postfix).append("\">").append(r.getName()).append("</a>");
+						append(r.getName()).append(postfix).append("\">").append(r.getName()).append("</a>");
 				}
 				showRegionChildren(sb, r, allRegions, current, prefix, postfix);
 				sb.append("</li>");
@@ -50,11 +50,11 @@ public class WebUtil {
 		}
 		for (Region r : allRegions) {
 			if (r.getParent() == null) {
-				if (current != null && current.getId() == r.getId().longValue()) {
+				if (current != null && current.getName().equals(r.getName())) {
 					sb.append("<li> <b>").append(r.getName()).append("</b>");
 				} else {
 					sb.append("<li> <a href=\"/").append(prefix).
-						append(r.getId()).append(postfix).append("\">").append(r.getName()).append("</a>");
+						append(r.getName()).append(postfix).append("\">").append(r.getName()).append("</a>");
 				}
 				showRegionChildren(sb, r, allRegions, current, prefix, postfix);
 				sb.append("</li>");
@@ -64,21 +64,21 @@ public class WebUtil {
 		return sb.toString();
 	}
 	
-	static void showFamilyChildren(StringBuffer sb, Group parent, List<Group>allFamilies, Region r, long currentId) {
+	static void showGroupChildren(StringBuffer sb, Group parent, List<Group>allGroups, Region r, String currentName) {
 		boolean first = true;
-		for (Group f: allFamilies) {
-			if (f.getParent() != null &&  f.getParent().getId() == parent.getId().longValue()) {
+		for (Group group: allGroups) {
+			if (group.getParent() != null &&  group.getParent().getName().equals(parent.getName())) {
 				if (first) {
 					sb.append("<ul>");
 					first = false;
 				}
-				if (f.getId().longValue() == currentId) {
-					sb.append("<li> <b>").append(f.getName()).append("</b>");		
+				if (group.getName().equals(currentName)) {
+					sb.append("<li> <b>").append(group.getName()).append("</b>");		
 				} else {
-					sb.append("<li> <a href=\"/family/").append(r == null ? "0" : r.getId()).append("/").
-						append(f.getId()).append("\">").append(f.getName()).append("</a>");
+					sb.append("<li> <a href=\"/group/").append(r == null ? "-" : r.getName()).append("/").
+						append(group.getName()).append("\">").append(group.getName()).append("</a>");
 				}
-				showFamilyChildren(sb, f, allFamilies, r, currentId);
+				showGroupChildren(sb, group, allGroups, r, currentName);
 				sb.append("</li>");
 			}
 		}
@@ -87,19 +87,19 @@ public class WebUtil {
 		}
 	}
 	
-	public static String showFamilies(DAO dao, Category t, Region r, long currentId) {
-		List<Group> allFamilies=  dao.getFamiliesList(t);
+	public static String showGroups(DAO dao, Category category, Region region, String currentName) {
+		List<Group> allGroups=  dao.getGroupList(category);
 		StringBuffer sb = new StringBuffer();
 		sb.append("<ul>");
-		for (Group f: allFamilies) {
-			if (f.getParent() == null) {
-				if (f.getId().longValue() == currentId) {
-					sb.append("<li> <b>").append(f.getName()).append("</b>");		
+		for (Group group: allGroups) {
+			if (group.getParent() == null) {
+				if (group.getName().equals(currentName)) {
+					sb.append("<li> <b>").append(group.getName()).append("</b>");		
 				} else {
-					sb.append("<li> <a href=\"/family/").append(r == null ? "0" : r.getId()).append("/").
-						append(f.getId()).append("\">").append(f.getName()).append("</a>");
+					sb.append("<li> <a href=\"/group/").append(region == null ? "0" : region.getName()).append("/").
+						append(group.getName()).append("\">").append(group.getName()).append("</a>");
 				}
-				showFamilyChildren(sb, f, allFamilies, r, currentId);
+				showGroupChildren(sb, group, allGroups, region, currentName);
 				sb.append("</li>");
 			}
 		}	

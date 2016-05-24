@@ -2,141 +2,99 @@ package com.guidentifier.dao;
 
 import static com.googlecode.objectify.ObjectifyService.ofy;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.ObjectifyService;
-import com.guidentifier.model.FamilyInfo;
-import com.guidentifier.model.Form;
-import com.guidentifier.model.Region;
-import com.guidentifier.model.Thing;
-import com.guidentifier.model.SpeciesInfo;
 import com.guidentifier.model.Category;
 import com.guidentifier.model.Group;
-import java.util.List;
-import java.util.ArrayList;
+import com.guidentifier.model.Identifier;
+import com.guidentifier.model.IdentifierOption;
+import com.guidentifier.model.OptionScore;
+import com.guidentifier.model.Region;
+import com.guidentifier.model.Thing;
 
 public class DAO {
 	static {
 		ObjectifyService.register(Category.class);
 		ObjectifyService.register(Group.class);
-		ObjectifyService.register(Form.class);
 		ObjectifyService.register(Thing.class);
-		ObjectifyService.register(FamilyInfo.class);
-		ObjectifyService.register(SpeciesInfo.class);
 		ObjectifyService.register(Region.class);
+		ObjectifyService.register(Identifier.class);
+		ObjectifyService.register(IdentifierOption.class);
+		ObjectifyService.register(OptionScore.class);
+
 	}
 	
-	public List<Category> getTypes() {
+	public List<Category> getCategories() {
 		return ofy().load().type(Category.class).list();
 	}
 	
-	public void add(Category t) {
-		ofy().save().entity(t).now();
+	public void addCategory(Category category) {
+		ofy().save().entity(category).now();
 	}
 	
-	public Category getType(String idStr) {
-		try {
-			Long id = Long.parseLong(idStr);
-			return ofy().load().type(Category.class).id(id).now();
-		} catch (NumberFormatException e) {
-			return null;
-		}
+	public Category getCategory(String name) {
+		return ofy().load().type(Category.class).id(name).now();
 	}
 	
-	public Category getType(Key<Category> key) {
+	public Category getCategory(Key<Category> key) {
 		return ofy().load().key(key).now();
 	}
 	
-	public Group getFamily(String idStr) {
-		try {
-			Long id = Long.parseLong(idStr);
-			return ofy().load().type(Group.class).id(id).now();
-		} catch (NumberFormatException e) {
-			return null;
-		}
+	public Group getGroup(String name) {
+		return ofy().load().type(Group.class).id(name).now();
 	}
 	
-	public Iterable<Group> getFamilies(Category t) {
-		return ofy().load().type(Group.class).filter("type", t);
+	public Iterable<Group> getGroups(Category category) {
+		return ofy().load().type(Group.class).filter("category", category);
 	}
 	
-	public List<Group> getFamiliesList(Category t) {
-		return ofy().load().type(Group.class).filter("type", t).list();
+	public List<Group> getGroupList(Category category) {
+		return ofy().load().type(Group.class).filter("category", category).list();
 	}
 	
-	public Iterable<Group> getFamilies(Group f) {
-		return ofy().load().type(Group.class).filter("parent =", f);
+	public Iterable<Group> getChildGroups(Group group) {
+		return ofy().load().type(Group.class).filter("parent =", group);
 	}
 	
-	public Group getFamily(Key<Group> key) {
+	public Group getGroup(Key<Group> key) {
 		return ofy().load().key(key).now();
 	}
 	
-	public void add(Group f) {
-		ofy().save().entity(f).now();
+	public void addGroup(Group group) {
+		ofy().save().entity(group).now();
 	}
 	
-	public Iterable<Form> getForms(Category t) {
-		return ofy().load().type(Form.class).filter("type", t);
+	public Iterable<Thing> getThing(Group group) {
+		return ofy().load().type(Thing.class).filter("group", group);
 	}
 	
-	public void add(Form f) {
-		ofy().save().entity(f).now();
+	public Thing getThing(String name) {
+		return ofy().load().type(Thing.class).id(name).now();	
 	}
 	
-	public Iterable<Thing> getSpecies(Group f) {
-		return ofy().load().type(Thing.class).filter("family", f);
+	public void addThing(Thing thing) {
+		ofy().save().entity(thing).now();
 	}
 	
-	public Thing getSpecies(String idStr) {
-		try {
-			Long id = Long.parseLong(idStr);
-			return ofy().load().type(Thing.class).id(id).now();
-		} catch (NumberFormatException e) {
-			return null;
-		}	
-	}
-	
-	public FamilyInfo getFamilyInfo(Group f) {
-		return ofy().load().type(FamilyInfo.class).filter("family", f).first().now();
-	}
-	
-	public SpeciesInfo getSpeciesInfo(Thing s) {
-		return ofy().load().type(SpeciesInfo.class).filter("species", s).first().now();
-	}
-	
-	public void add(Thing s) {
-		ofy().save().entity(s).now();
-	}
-	
-	public void add(FamilyInfo fi) {
-		ofy().save().entity(fi).now();
-	}
-	
-	public void add(SpeciesInfo si) {
-		ofy().save().entity(si).now();
-	}
-	
-	public List<Group> getParents(Group f) {
+	public List<Group> getParents(Group group) {
 		List<Group> ret = new ArrayList<Group>();
-		Group fam = f;
-		while (fam.getParent() != null) {
-			fam = fam.getParent();
-			ret.add(0, fam);
+		Group g = group;
+		while (g.getParent() != null) {
+			g = g.getParent();
+			ret.add(0, g);
 		}
 		return ret;
 	}
 	
-	public Region getRegion(String idStr) {
-		try {
-			Long id = Long.parseLong(idStr);
-			return ofy().load().type(Region.class).id(id).now();
-		} catch (NumberFormatException e) {
-			return null;
-		}
+	public Region getRegion(String name) {
+		return ofy().load().type(Region.class).id(name).now();
 	}
 	
-	public void add(Region r) {
-		ofy().save().entity(r).now();
+	public void addRegion(Region region) {
+		ofy().save().entity(region).now();
 	}
 	
 	public List<Region> getRegionsList() {
