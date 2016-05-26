@@ -4,7 +4,7 @@ function init() {
 	var apisToLoad;
 	var callback = function() {
 		if (--apisToLoad == 0) { 
-			ReactDOM.render(React.createElement(TypeBox), document.querySelector('#content'));
+			ReactDOM.render(React.createElement(CategoryBox), document.querySelector('#content'));
 		}
 	}
 

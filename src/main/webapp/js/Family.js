@@ -1,6 +1,6 @@
 "use strict";
   
-var FamilyForm = React.createClass({
+var GroupForm = React.createClass({
 	getInitialState: function() {
 	  return {name: ''};
 	},
@@ -13,46 +13,46 @@ var FamilyForm = React.createClass({
 		if (!name) {
 			return;
 		}
-	    this.props.onFamilySubmit(this.props.typeId, name);
+	    this.props.onGroupSubmit(this.props.categoryName, name);
 		this.setState({name: ''});
 	},
 	render: function() {
-		if (this.props.typeId == null) {
+		if (this.props.categoryName == null) {
 			return (
-					<div className="emptyFamilyForm"></div>
+					<div className="emptyGroupForm"></div>
 			);
 		}
 			
 		return (
-	      <form className="familyForm" onSubmit={this.handleSubmit}>
+	      <form className="groupForm" onSubmit={this.handleSubmit}>
 	        <input
 	          type="text"
-	          placeholder="Family name"
+	          placeholder="Group name"
 	          value={this.state.name}
 	          onChange={this.handleNameChange}
 	        />
-	        <input type="submit" value="Add family" />
+	        <input type="submit" value="Add group" />
 	      </form>
 	    );
 	}
 });
 
-var FamilyBox = React.createClass({
+var GroupBox = React.createClass({
 	render: function() {
-	    var familyNodes = this.props.families.map(function(family) {
+	    var groupNodes = this.props.groups.map(function(group) {
 	      return (
-	    		<div key={family.id} className="family">
-					{family.name}
+	    		<div key={group.name} className="group">
+					{group.name}
 				</div>
 	      );
 	    });
 	    return (
-	      <div className="familyBox">
-	        <h1>Families</h1>
-	        <div className="familyList">
-	          {familyNodes}
+	      <div className="groupBox">
+	        <h1>Groups</h1>
+	        <div className="groupList">
+	          {groupNodes}
 	        </div>
-	        <FamilyForm typeId={this.props.typeId} onFamilySubmit={this.props.onFamilySubmit}/>
+	        <GroupForm categoryName={this.props.categoryName} onGroupSubmit={this.props.onGroupSubmit}/>
 	      </div>
 	    );
 	}

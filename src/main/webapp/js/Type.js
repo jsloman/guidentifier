@@ -1,42 +1,42 @@
 "use strict";
  
-var Type = React.createClass({
+var Category = React.createClass({
 	rawMarkup: function() {
 		var rawMarkup = marked(this.props.children.toString(), {sanitize: true});
 		return { __html: rawMarkup };
 	},
 	handleClick: function(e) {
-	    this.props.onTypeSelect(this.props.type.id);
+	    this.props.onCategorySelect(this.props.category.name);
 	},
 	render: function() {
 		return (
-				<div className="type">
-					<h2 className="typeName" onClick={this.handleClick}>
-						{this.props.type.name}
+				<div className="category">
+					<h2 className="categoryName" onClick={this.handleClick}>
+						{this.props.category.name}
 					</h2>
 				</div>
 		);
 	}
 });
 
-var TypeList = React.createClass({
+var CategoryList = React.createClass({
 	render: function() {
-	    var typeNodes = this.props.types.map(function(type) {
+	    var categoryNodes = this.props.categories.map(function(category) {
 	      return (
-	        <Type key={type.id} type={type} onTypeSelect={this.props.onTypeSelect}>
-	          {type.name}
-	        </Type>
+	        <Category key={category.name} category={category} onCategorySelect={this.props.onCategorySelect}>
+	          {category.name}
+	        </Category>
 	      );
 	    }.bind(this));
 	    return (
-	      <div className="typeList">
-	        {typeNodes}
+	      <div className="categoryList">
+	        {categoryNodes}
 	      </div>
 	    );
 	}
 });
 
-var TypeForm = React.createClass({
+var CategoryForm = React.createClass({
 	getInitialState: function() {
 	  return {name: ''};
 	},
@@ -49,7 +49,7 @@ var TypeForm = React.createClass({
 		if (!name) {
 			return;
 		}
-	    this.props.onTypeSubmit({name: name});
+	    this.props.onCategorySubmit({name: name});
 		this.setState({name: ''});
 	},
 	render: function() {
@@ -57,75 +57,75 @@ var TypeForm = React.createClass({
 	      <form className="commentForm" onSubmit={this.handleSubmit}>
 	        <input
 	          type="text"
-	          placeholder="Type name"
+	          placeholder="Category name"
 	          value={this.state.name}
 	          onChange={this.handleNameChange}
 	        />
-	        <input type="submit" value="Add type" />
+	        <input type="submit" value="Add category" />
 	      </form>
 	    );
 	}
 });
 
-var TypeBox = React.createClass({
-	loadTypesFromServer: function() {
-		gapi.client.guidentifierApi.guidentifierApi.getTypes().execute(
-			function(types) { 
-				console.log('got data: ' + JSON.stringify(types)); 
-				this.setState({types: types.items})
+var CategoryBox = React.createClass({
+	loadCategoriesFromServer: function() {
+		gapi.client.guidentifierApi.guidentifierApi.getCategories().execute(
+			function(categories) { 
+				console.log('got data: ' + JSON.stringify(categories)); 
+				this.setState({categories: categories.items})
 			}.bind(this)
 		);
 	},
-	loadFamiliesFromServer: function(typeId) {
-		if (typeId != null) {
-			gapi.client.guidentifierApi.guidentifierApi.getFamilies({typeId: typeId}).execute(
-					function(families) { 
-						console.log('got family data: ' + JSON.stringify(families)); 
-						this.setState({families: families.items})
+	loadGroupsFromServer: function(categoryName) {
+		if (categoryName != null) {
+			gapi.client.guidentifierApi.guidentifierApi.getGroups({categoryName: categoryName}).execute(
+					function(groups) { 
+						console.log('got group data: ' + JSON.stringify(groups)); 
+						this.setState({groups: groups.items})
 					}.bind(this)
 				);		
 		}	
 	},
-	handleTypeSubmit: function(typeObj) {
-		console.log(' adding type: ' + typeObj + ' which is: ' + JSON.stringify(typeObj));
-	    gapi.client.guidentifierApi.guidentifierApi.addType(typeObj).execute(
+	handleCategorySubmit: function(categoryObj) {
+		console.log(' adding category: ' + categoryObj + ' which is: ' + JSON.stringify(categoryObj));
+	    gapi.client.guidentifierApi.guidentifierApi.addCategory(categoryObj).execute(
 			   function(response) {
-				   console.log('added type: ' + JSON.stringify(response));
-				   this.loadTypesFromServer();
+				   console.log('added category: ' + JSON.stringify(response));
+				   this.loadCategoriesFromServer();
 			   }.bind(this)
 	   );
 	},
-	handleFamilySubmit: function(typeId, familyName) {
-		console.log(' adding family: ' + familyName);
-	    gapi.client.guidentifierApi.guidentifierApi.addFamily({typeId: typeId, familyName: familyName}).execute(
+	handleGroupSubmit: function(categoryName, groupName) {
+		console.log(' adding group: ' + groupName);
+	    gapi.client.guidentifierApi.guidentifierApi.addGroup({categoryName: categoryName, groupName: groupName}).execute(
 			   function(response) {
-				   console.log('added family: ' + JSON.stringify(response));
-				   this.loadFamiliesFromServer(this.state.typeId);
+				   console.log('added group: ' + JSON.stringify(response));
+				   this.loadGroupsFromServer(this.state.categoryName);
 			   }.bind(this)
 	   );
 	},
-	handleTypeSelect: function(typeId) {
-	    this.setState({typeId: typeId});
-	    this.loadFamiliesFromServer(typeId);
+	handleCategorySelect: function(categoryName) {
+	    this.setState({categoryName: categoryName});
+	    this.loadGroupsFromServer(categoryName);
 	},	
 	getInitialState: function() {
-		return {types: [], typeId: null, families: []};
+		return {categories: [], categoryName: null, groups: []};
 	},
 	componentDidMount: function() {
-	    this.loadTypesFromServer();
+	    this.loadCategoriesFromServer();
 	},
 	render: function() {
 	    return (
-	      <div className="typeBox">
-	        <h1>Types</h1>
-	        <TypeList types={this.state.types} onTypeSelect={this.handleTypeSelect}/>
-	        <TypeForm onTypeSubmit={this.handleTypeSubmit} />
-	        <FamilyBox typeId={this.state.typeId} families={this.state.families} onFamilySubmit={this.handleFamilySubmit}/>
+	      <div className="categoryBox">
+	        <h1>Categories</h1>
+	        <CategoryList categories={this.state.categories} onCategorySelect={this.handleCategorySelect}/>
+	        <CategoryForm onCategorySubmit={this.handleCategorySubmit} />
+	        <GroupBox categoryName={this.state.categoryName} groups={this.state.groups} onGroupSubmit={this.handleGroupSubmit}/>
 	        </div>
 	    );
 	}
 });
 
 // add it to global context so we can reference this from javascript.
-window.TypeBox = TypeBox;
+window.CategoryBox = CategoryBox;
 
