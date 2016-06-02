@@ -1,0 +1,52 @@
+{
+	"category.name" : "birds",
+	"groups" : [
+		{
+			"name" : "palaeognathae",
+			"groups" : [
+				{
+					"name" : "struthioniformes"
+				},
+				{
+					"name" : "rheiformes"
+				},
+				{
+					"name" : "tinamiformes"
+				},
+				{
+					"name" : "casuariformes"
+				},
+				{
+					"name" : "apterygiformes"
+				}
+			]
+		},
+		{
+			"name" : "neognathae",
+			"groups" : [
+				{
+					"name" : "galloanserae",
+					"groups" : [
+						{
+							"name" : "galliformes"
+						},
+						{
+							"name" : "anseriformes"
+						}
+					]
+				},
+				{
+					"name" : "neoaves",
+					"groups" : [
+						{
+							"name" : "phoenicopteriformes"
+						},
+						{
+							"name" : "podicipediformes"
+						}
+					]
+				}
+			]
+		}		
+	]
+}
