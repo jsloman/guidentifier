@@ -11,7 +11,9 @@ module.exports = {
         './src/main/webapp/scripts/index.js'
     ],
     module: {
-        loaders: []
+        loaders: [
+            { test: /\.js[x]?$/, exclude: /node_modules/, loaders: ['babel-loader'] },
+        ]
     },
     output: {
         filename: "index_bundle.js",
