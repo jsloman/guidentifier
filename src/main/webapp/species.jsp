@@ -12,16 +12,11 @@
 	boolean isAdmin = true;
 	String thisURL = "/species";
 	DAO dao = new DAO();
-	
-	void addSpeciesInfo(SpeciesInfo si) {
-		dao.add(si);
-	}
 %>
 <%
-	Species species = null;
-	SpeciesInfo speciesInfo = null;
-	Type type = null;
-	Family family = null;
+	Thing species = null;
+	Category type = null;
+	Group family = null;
 	Region region = null;
 
 	if (request.getPathInfo() == null || request.getPathInfo().length() == 1) {
@@ -38,57 +33,44 @@
 	}
 
 	String idStr = parts[2];
-	species = dao.getSpecies(idStr);
+	species = dao.getThing(idStr);
 	if (species == null) {
 		response.sendRedirect("/speciesError/" + idStr);
 	}
-	speciesInfo = dao.getSpeciesInfo(species);
-	type = species.getType();
-	family = species.getFamily();
-	if (speciesInfo == null) {
-		speciesInfo = new SpeciesInfo(species);
-		addSpeciesInfo(speciesInfo);
-	}
+	type = species.getCategory();
+	family = species.getGroup();
 
 	if (isAdmin && request.getParameter("species.edit") != null) {
 		species.setName(request.getParameter("edit.name"));
-		dao.add(species);
-		speciesInfo.setDescription(request.getParameter("edit.description"));
-		speciesInfo.setImage(request.getParameter("edit.image"));
-		speciesInfo.setWikipediaURL(request.getParameter("edit.wikipediaURL"));
-		dao.add(speciesInfo);
+		dao.addThing(species);
 	}
 
 %>
 <html>
   <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <title>Guidentifier: Species - <%= species.getName() %></title>
+    <title>Guidentifier: Thing - <%= species.getName() %></title>
     <link rel="stylesheet" type="text/css" href="/style/main.css" />
   </head>
    <body>
 <div id="title">
-	Guidentifier: Species - <%= species.getName() %>
+	Guidentifier: Thing - <%= species.getName() %>
 </div>
 <div id="breadcrumbs">
-	<a href="/<%= region != null ? region.getId() : ""%>">Home</a> > <a href="/type/<%= region == null ? "0" : region.getId() %>/<%= type.getId() %>"><%= type.getName() %></a>
+	<a href="/<%= region != null ? region.getName() : ""%>">Home</a> > <a href="/type/<%= region == null ? "0" : region.getName() %>/<%= type.getName() %>"><%= type.getName() %></a>
 <% 
-	List<Family> parents = dao.getParents(family);
-	for (Family fiter : parents) {
+	List<Group> parents = dao.getParents(family);
+	for (Group fiter : parents) {
 %>
-	> <a href="/family/<%= region == null ? "0" : region.getId() %>/<%= fiter.getId() %>"><%= fiter.getName() %></a>
+	> <a href="/family/<%= region == null ? "0" : region.getName() %>/<%= fiter.getName() %>"><%= fiter.getName() %></a>
 <%
 	}
 %>
-	> <a href="/family/<%= region == null ? "0" : region.getId() %>/<%= family.getId() %>"><%= family.getName() %></a>
+	> <a href="/family/<%= region == null ? "0" : region.getName() %>/<%= family.getName() %>"><%= family.getName() %></a>
 	> <%= species.getName() %>
 </div>
 <div id="info">
 	Info on <%= species.getName() %>
-	<p><img src="<%= speciesInfo.getImage() %>" align="left"/>
-	<%= speciesInfo.getDescription() %>
-	</p>
-	<p><a href="<%= speciesInfo.getWikipediaURL() %>">Wikipedia article</a></p>
 	<br clear="all"/>
 </div>
 
@@ -97,12 +79,9 @@
 %>
 <div id="admin">
 	Admin
-	<form action="<%= thisURL %>/<%= region == null ? "0" : region.getId() %>/<%= species.getId() %>" method="post">
+	<form action="<%= thisURL %>/<%= region == null ? "0" : region.getName() %>/<%= species.getName() %>" method="post">
 	<p>Edit info:</p>
-	Species name: <input type="text" name="edit.name" size="50" value="<%= WebUtil.encodeForWeb(species.getName()) %>"/><br/>
-	Description: <textarea name="edit.description" rows="5" cols="100"><%= WebUtil.encodeForWeb(speciesInfo.getDescription()) %></textarea><br/>
-	Image URL: <input type="text" name="edit.image" size="80" value="<%= WebUtil.encodeForWeb(speciesInfo.getImage()) %>"/><br/>
-	Wikipedia URL: <input type="text" name="edit.wikipediaURL" size="80" value="<%= WebUtil.encodeForWeb(speciesInfo.getWikipediaURL()) %>"/><br/>
+	Thing name: <input type="text" name="edit.name" size="50" value="<%= WebUtil.encodeForWeb(species.getName()) %>"/><br/>
 	<input type="submit" name="species.edit" value="Save"/>
 	<input type="reset" value="Reset"/>
 	</form>

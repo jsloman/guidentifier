@@ -13,9 +13,9 @@
 	String thisURL = "/";
 	DAO dao = new DAO();
 		
-	void addType(String name) {
-		Type t = new Type(name);
-		dao.add(t);
+	void addCategory(String name) {
+		Category t = new Category(name);
+		dao.addCategory(t);
 	}
 	
 	void addRegion(Region parent, String name) {
@@ -25,7 +25,7 @@
 		} else {
 			r = new Region(parent, name);
 		}
-		dao.add(r);
+		dao.addRegion(r);
 		System.err.println("Added region: " + name);
 	}
 
@@ -40,14 +40,14 @@
 	}
 	
 	if (isAdmin && request.getParameter("type.add") != null) {
-		addType(request.getParameter("type.name"));
+		addCategory(request.getParameter("type.name"));
 	}
 	if (isAdmin && request.getParameter("region.add") != null) {
 		addRegion(region, request.getParameter("region.name"));
 	}
 	if (isAdmin && request.getParameter("region.edit") != null && region != null) {
 		region.setName(request.getParameter("region.editname"));
-		dao.add(region);
+		dao.addRegion(region);
 	}
 %>
 <html>
@@ -71,10 +71,10 @@ Home
 	<p>Choose what kind of thing you want to Guidentify:</p>
 	<ul>
 <%
-	Iterable<Type> types = dao.getTypes();
-	for (Type t : types) {
+	Iterable<Category> types = dao.getCategories();
+	for (Category t : types) {
 %>
-		<li> <a href="type/<%= region == null ? "0" : region.getId() %>/<%= t.getId()%>" %><%= t.getName()%></a></li>
+		<li> <a href="type/<%= region == null ? "0" : region.getName() %>/<%= t.getName()%>"><%= t.getName()%></a></li>
 <%
 	}
 %>
@@ -85,7 +85,7 @@ Home
 %>
 <div id="admin">
 	Admin
-	<form action="<%= thisURL %><%= region != null ? region.getId() : "" %>" method="post">
+	<form action="<%= thisURL %><%= region != null ? region.getName() : "" %>" method="post">
 	<p>Add type:</p>
 
 	<input type="text" size="50" name="type.name"/>

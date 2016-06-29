@@ -10,28 +10,23 @@
                  com.googlecode.objectify.*" %>
 <%! 
 	boolean isAdmin = true;
-	String thisURL = "/family";
+	String thisURL = "/Group";
 	DAO dao = new DAO();
 	
-	void addFamily(Family parent, String name) {
-		Family f = new Family(parent, name);
-		dao.add(f);
+	void addGroup(Group parent, String name) {
+		Group f = new Group(parent, name);
+		dao.addGroup(f);
 	}
 	
-	void addSpecies(Family parent, String name) {
-		Species s = new Species(parent, name);
-		dao.add(s);
-	}
-	
-	void addFamilyInfo(FamilyInfo fi) {
-		dao.add(fi);
+	void addThing(Group parent, String name) {
+		Thing s = new Thing(parent, name);
+		dao.addThing(s);
 	}
 %>
 <%
-	Family family = null;
-	FamilyInfo familyInfo = null;
+	Group Group = null;
 	Region region = null;
-	Type type = null;
+	Category Category = null;
 
 	if (request.getPathInfo() == null || request.getPathInfo().length() == 1) {
 		response.sendRedirect("/");
@@ -47,72 +42,63 @@
 	}
 
 	String idStr = parts[2];
-	family = dao.getFamily(idStr);
-	if (family == null) {
-		response.sendRedirect("/familyError/" + idStr);
+	Group = dao.getGroup(idStr);
+	if (Group == null) {
+		response.sendRedirect("/GroupError/" + idStr);
 	}
-	familyInfo = dao.getFamilyInfo(family);
-	type = family.getType();
-	if (familyInfo == null) {
-		familyInfo = new FamilyInfo(family);
-		addFamilyInfo(familyInfo);
-	}
+	Category = Group.getCategory();
 
-	if (isAdmin && request.getParameter("family.add") != null) {
-		addFamily(family, request.getParameter("family.name"));
+	if (isAdmin && request.getParameter("Group.add") != null) {
+		addGroup(Group, request.getParameter("Group.name"));
 	}
-	if (isAdmin && request.getParameter("species.add") != null) {
-		addSpecies(family, request.getParameter("species.name"));
+	if (isAdmin && request.getParameter("Thing.add") != null) {
+		addThing(Group, request.getParameter("Thing.name"));
 	}
-	if (isAdmin && request.getParameter("family.edit") != null) {
-		family.setName(request.getParameter("edit.name"));
-		dao.add(family);
-		familyInfo.setDescription(request.getParameter("edit.description"));
-		familyInfo.setImage(request.getParameter("edit.image"));
-		familyInfo.setWikipediaURL(request.getParameter("edit.wikipediaURL"));
-		dao.add(familyInfo);
+	if (isAdmin && request.getParameter("Group.edit") != null) {
+		Group.setName(request.getParameter("edit.name"));
+		dao.addGroup(Group);
 	}
 
 %>
 <html>
   <head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <title>Guidentifier: Family - <%= family.getName() %></title>
+    <meta http-equiv="content-Category" content="text/html; charset=UTF-8">
+    <title>Guidentifier: Group - <%= Group.getName() %></title>
     <link rel="stylesheet" type="text/css" href="/style/main.css" />
   </head>
    <body>
 <div id="title">
-	Guidentifier: Family - <%= family.getName() %>
+	Guidentifier: Group - <%= Group.getName() %>
 </div>
 <div id="breadcrumbs">
-	<a href="/<%= region != null ? region.getId() : ""%>">Home</a> > <a href="/type/<%= region == null ? "0" : region.getId() %>/<%= type.getId() %>"><%= type.getName() %></a>
+	<a href="/<%= region != null ? region.getName() : ""%>">Home</a> > <a href="/Category/<%= region == null ? "0" : region.getName() %>/<%= Category.getName() %>"><%= Category.getName() %></a>
 <% 
-	List<Family> parents = dao.getParents(family);
-	for (Family fiter : parents) {
+	List<Group> parents = dao.getParents(Group);
+	for (Group fiter : parents) {
 %>
-	> <a href="/family/<%= region == null ? "0" : region.getId() %>/<%= fiter.getId() %>"><%= fiter.getName() %></a>
+	> <a href="/Group/<%= region == null ? "0" : region.getName() %>/<%= fiter.getName() %>"><%= fiter.getName() %></a>
 <%
 	}
 %>
-	> <%= family.getName() %>
+	> <%= Group.getName() %>
 </div>
 <div id="region">
 	<p>Region:</p>
-	<%= WebUtil.showRegions(dao, region, "family/", "/" + family.getId()) %>
+	<%= WebUtil.showRegions(dao, region, "Group/", "/" + Group.getName()) %>
 </div>
 <div id="topcontent">
 	<div id="guide">
 		<h2>Guide - families:</h2>
-		<%= WebUtil.showFamilies(dao, type, region, family.getId().longValue()) %>
+		<%= WebUtil.showGroups(dao, Category, region, Group.getName()) %>
 	</div>
-	<div id="species">
-		<h2>Species in family:</h2>
+	<div id="Thing">
+		<h2>Thing in Group:</h2>
 		<ul>
 <%
-	Iterable<Species> species = dao.getSpecies(family);
-	for (Species s : species) {
+	Iterable<Thing> Thing = dao.getThing(Group);
+	for (Thing s : Thing) {
 %>
-			<li> <a href="/species/<%= region == null ? "0" : region.getId() %>/<%= s.getId()%>" ><%= s.getName()%></a></li>
+			<li> <a href="/Thing/<%= region == null ? "0" : region.getName() %>/<%= s.getName()%>" ><%= s.getName()%></a></li>
 <%
 	}
 %>
@@ -120,11 +106,7 @@
 	</div>
 </div>
 <div id="info">
-	<h2>Info on <%= family.getName() %></h2>
-	<p><img src="<%= familyInfo.getImage() %>" align="left"/>
-	<%= familyInfo.getDescription() %>
-	</p>
-	<p><a href="<%= familyInfo.getWikipediaURL() %>">Wikipedia article</a></p>
+	<h2>Info on <%= Group.getName() %></h2>
 	<br clear="all"/>
 </div>
 
@@ -133,20 +115,17 @@
 %>
 <div id="admin">
 	Admin
-	<form action="<%= thisURL %>/<%= region == null ? "0" : region.getId() %>/<%= family.getId() %>" method="post">
-	<p>Add sub-family:</p>
-	<input type="text" name="family.name"/>
-	<input type="submit" name="family.add" value="Add"/>
+	<form action="<%= thisURL %>/<%= region == null ? "0" : region.getName() %>/<%= Group.getName() %>" method="post">
+	<p>Add sub-Group:</p>
+	<input type="text" name="Group.name"/>
+	<input type="submit" name="Group.add" value="Add"/>
 	<br/>
-	<p>Add species:</p>
-	<input type="text" name="species.name"/>
-	<input type="submit" name="species.add" value="Add"/>
+	<p>Add Thing:</p>
+	<input type="text" name="Thing.name"/>
+	<input type="submit" name="Thing.add" value="Add"/>
 	<p>Edit info:</p>
-	Family name: <input type="text" name="edit.name" size="50" value="<%= WebUtil.encodeForWeb(family.getName()) %>"/><br/>
-	Description: <textarea name="edit.description" cols="100" rows="5"><%= WebUtil.encodeForWeb(familyInfo.getDescription()) %></textarea><br/>
-	Image URL: <input type="text" name="edit.image" size="80" value="<%= WebUtil.encodeForWeb(familyInfo.getImage()) %>"/><br/>
-	Wikipedia URL: <input type="text" name="edit.wikipediaURL" size="80" value="<%= WebUtil.encodeForWeb(familyInfo.getWikipediaURL()) %>"/><br/>
-	<input type="submit" name="family.edit" value="Save"/>
+	Group name: <input type="text" name="edit.name" size="50" value="<%= WebUtil.encodeForWeb(Group.getName()) %>"/><br/>
+	<input type="submit" name="Group.edit" value="Save"/>
 	<input type="reset" value="Reset"/>
 	</form>
 </div>

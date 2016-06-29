@@ -13,21 +13,14 @@
 	String thisURL = "/type";
 	DAO dao = new DAO();
 	
-	void addFamily(Type t, String name) {
-		Family f = new Family(t, name);
-		dao.add(f);
+	void addGroup(Category t, String name) {
+		Group f = new Group(t, name);
+		dao.addGroup(f);
 	}
-	
-	void addForm(Type t, String name) {
-		Form f = new Form(t, name);
-		dao.add(f);
-	}
-	
-
 %>
 <%
 	Region region = null;
-	Type type = null;
+	Category type = null;
 	if (request.getPathInfo() == null || request.getPathInfo().length() == 1) {
 		response.sendRedirect("/");
 	}
@@ -42,55 +35,39 @@
 	}
 
 	String idStr = parts[2];
-	type = dao.getType(idStr);
+	type = dao.getCategory(idStr);
 	if (type == null) {
 		response.sendRedirect("/typeError/" + idStr);
 	}
 	
 	if (isAdmin && request.getParameter("family.add") != null) {
-		addFamily(type, request.getParameter("family.name"));
-	}
-	if (isAdmin && request.getParameter("form.add") != null) {
-		addForm(type, request.getParameter("form.name"));
+		addGroup(type, request.getParameter("family.name"));
 	}
 	if (isAdmin && request.getParameter("type.edit") != null) {
 		type.setName(request.getParameter("edit.name"));
-		dao.add(type);
+		dao.addCategory(type);
 	}
 %>
 <html>
   <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <title>Guidentifier: Type - <%= type.getName() %></title>
+    <title>Guidentifier: Category - <%= type.getName() %></title>
     <link rel="stylesheet" type="text/css" href="/style/main.css" />    
   </head>
    <body><div id="title">
-	Guidentifier: Type - <%= type.getName() %>
+	Guidentifier: Category - <%= type.getName() %>
 </div>
 <div id="breadcrumbs">
-	<a href="/<%= region != null ? region.getId() : ""%>">Home</a> > <%= type.getName() %>
+	<a href="/<%= region != null ? region.getName() : ""%>">Home</a> > <%= type.getName() %>
 </div>
 <div id="region">
 	<p>Region:</p>
-	<%= WebUtil.showRegions(dao, region, "type/", "/" + type.getId()) %>
+	<%= WebUtil.showRegions(dao, region, "type/", "/" + type.getName()) %>
 </div>
 <div id="topcontent">
 	<div id="guide">
 		<h2>Guide - families:</h2>
-		<%= WebUtil.showFamilies(dao, type, region, -1) %>
-	</div>
-	<div id="identifier">
-		<h2>Identifier - form to identify:</h2>
-		<ul>
-<%
-	Iterable<Form> forms = dao.getForms(type);
-	for (Form f : forms) {
-%>
-			<li> <a href="/form/<%= f.getId()%>" %><%= f.getName()%></a></li>
-<%
-	}
-%>
-		</ul>
+		<%= WebUtil.showGroups(dao, type, region, null) %>
 	</div>
 </div>
 <%
@@ -98,7 +75,7 @@
 %>
 <div id="admin">
 	Admin
-	<form action="<%= thisURL %>/<%= region == null ? "0" : region.getId() %>/<%= type.getId() %>" method="post">
+	<form action="<%= thisURL %>/<%= region == null ? "0" : region.getName() %>/<%= type.getName() %>" method="post">
 	<p>Add family:</p>
 	<input type="text" name="family.name"/>
 	<input type="submit" name="family.add" value="Add"/>
@@ -108,7 +85,7 @@
 	<input type="submit" name="form.add" value="Add"/>
 	<br/>
 	<p>Edit type:</p>
-	Type Name: <input type="text" name="edit.name" size="50" value="<%= WebUtil.encodeForWeb(type.getName()) %>"/><br/>
+	Category Name: <input type="text" name="edit.name" size="50" value="<%= WebUtil.encodeForWeb(type.getName()) %>"/><br/>
 	<input type="submit" name="type.edit" value="Save"/>
 	<input type="reset" value="Reset"/>
 	</form>
