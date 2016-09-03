@@ -1,4 +1,4 @@
-appengine-skeleton
+Guidentifier
 =============================
 
-This is a generated application from the appengine-skeleton archetype.
+General purpose tool for identifying things. Like birds and trees.
