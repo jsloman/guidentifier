@@ -1,0 +1,108 @@
+[
+	{
+		"name" : "size",
+		"description" : "overall size of bird",
+		"options" : [
+			{
+				"name" : "tiny",
+				"scores" : [
+				 ]
+			 },
+			{
+				"name" : "small",
+				"scores" : [
+				 ]
+			 },
+			{
+				"name" : "medium",
+				"scores" : [
+				 ]
+			 },
+			{
+				"name" : "large",
+				"scores" : [
+				 ]
+			 },
+			{
+				"name" : "huge",
+				"scores" : [
+				 ]
+			 } ]
+		,
+		"identifiers" : [
+			{
+				"name" : "wingspan",
+				"description" : "span of outstretched wings",
+				"options" : [
+					{
+						"name" : "tiny",
+						"scores" : [
+						 ]
+					 },
+					{
+						"name" : "small",
+						"scores" : [
+						 ]
+					 },
+					{
+						"name" : "medium",
+						"scores" : [
+						 ]
+					 },
+					{
+						"name" : "large",
+						"scores" : [
+						 ]
+					 },
+					{
+						"name" : "huge",
+						"scores" : [
+						 ]
+					 } ]
+			 } ]
+	 },
+	{
+		"name" : "colour",
+		"description" : "overall colour of bird",
+		"options" : [
+			{
+				"name" : "black",
+				"scores" : [
+				 ]
+			 },
+			{
+				"name" : "yellow",
+				"scores" : [
+				 ]
+			 },
+			{
+				"name" : "grey",
+				"scores" : [
+				 ]
+			 },
+			{
+				"name" : "brown",
+				"scores" : [
+				 ]
+			 },
+			{
+				"name" : "white",
+				"scores" : [
+				 ]
+			 } ]
+	 },
+	{
+		"name" : "beak",
+		"description" : "shape of beak",
+		"options" : [
+			{
+				"name" : "pointed",
+				"scores" : [
+				 ]
+			 },
+			{
+				"name" : "finchy",
+				"scores" : [
+				 ]
+			 } ]
+	 } ]

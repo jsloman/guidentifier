@@ -1,0 +1,51 @@
+{
+	"groups" : [
+		{
+			"name" : "paridae",
+			"description" : "tits",
+			"things" : [
+				{
+					"name" : "cyanistes caeruleus",
+					"description" : "eurasian blue tit" },
+				{
+					"name" : "parus major",
+					"description" : "great tit" },
+				{
+					"name" : "periparus ater",
+					"description" : "coal tit" },
+				{
+					"name" : "aegithalos caudatus",
+					"description" : "long-tailed tit" },
+				{
+					"name" : "poecile palustris",
+					"description" : "marsh tit" } ]
+		 },
+		{
+			"name" : "turdidae",
+			"description" : "thrushes",
+			"things" : [
+				{
+					"name" : "turdus merula",
+					"description" : "blackbird" },
+				{
+					"name" : "turdus philomelos",
+					"description" : "song thrush" },
+				{
+					"name" : "turdus viscivorus",
+					"description" : "mistle thrush" },
+				{
+					"name" : "turdus iliacus",
+					"description" : "redwing" },
+				{
+					"name" : "turdus pilaris",
+					"description" : "fieldfare" } ]
+		 },
+		{
+			"name" : "passeridae",
+			"description" : "sparrows",
+			"things" : [
+				{
+					"name" : "passer domesticus",
+					"description" : "house sparrow" } ]
+		 } ]
+ }
