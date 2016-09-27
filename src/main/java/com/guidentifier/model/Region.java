@@ -11,7 +11,10 @@ public class Region {
 	@Id String name;
 	@Index @Load Ref<Region> parent;
 	
-	/* TODO should a region possibly be relevant for a specific category only? */
+	/* TODO should a region possibly be relevant for a specific category only?
+	 * 
+	 *  Or should we not have region as anything special, it could just be another Identifier
+	 *  */
 	
 	@SuppressWarnings("unused")
 	private Region() {

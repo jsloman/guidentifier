@@ -3,7 +3,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath "com.google.appengine:gradle-appengine-plugin:1.9.32"
+        classpath "com.google.appengine:gradle-appengine-plugin:1.9.42"
     }
 }
 
@@ -17,13 +17,13 @@ apply plugin: 'eclipse-wtp'
 
 def appEmail  = "jonathans2@gmail.com"		
 
-def appengineVersion = "1.9.38"
+def appengineVersion = "1.9.42"
 
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '2.14'
+    gradleVersion = '3.1'
 }
 
 dependencies {

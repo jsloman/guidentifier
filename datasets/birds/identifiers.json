@@ -1,108 +1,82 @@
 [
 	{
-		"name" : "size",
-		"description" : "overall size of bird",
-		"options" : [
+		"name": "size",
+		"description": "overall size of bird",
+		"options": [
 			{
-				"name" : "tiny",
-				"scores" : [
-				 ]
-			 },
+				"name": "tiny"
+			},
 			{
-				"name" : "small",
-				"scores" : [
-				 ]
-			 },
+				"name": "small"
+			},
 			{
-				"name" : "medium",
-				"scores" : [
-				 ]
-			 },
+				"name": "medium"
+			},
 			{
-				"name" : "large",
-				"scores" : [
-				 ]
-			 },
+				"name": "large"
+			},
 			{
-				"name" : "huge",
-				"scores" : [
-				 ]
-			 } ]
-		,
-		"identifiers" : [
+				"name": "huge"
+			}
+		],
+		"identifiers": [
 			{
-				"name" : "wingspan",
-				"description" : "span of outstretched wings",
-				"options" : [
+				"name": "wingspan",
+				"description": "span of outstretched wings",
+				"options": [
 					{
-						"name" : "tiny",
-						"scores" : [
-						 ]
-					 },
+						"name": "tiny"
+					},
 					{
-						"name" : "small",
-						"scores" : [
-						 ]
-					 },
+						"name": "small"
+					},
 					{
-						"name" : "medium",
-						"scores" : [
-						 ]
-					 },
+						"name": "medium"
+					},
 					{
-						"name" : "large",
-						"scores" : [
-						 ]
-					 },
+						"name": "large"
+					},
 					{
-						"name" : "huge",
-						"scores" : [
-						 ]
-					 } ]
-			 } ]
-	 },
+						"name": "huge"
+					}
+				]
+			}
+		]
+	},
 	{
-		"name" : "colour",
-		"description" : "overall colour of bird",
-		"options" : [
+		"name": "colour",
+		"description": "overall colour of bird",
+		"options": [
 			{
-				"name" : "black",
-				"scores" : [
-				 ]
-			 },
+				"name": "black"
+			},
 			{
-				"name" : "yellow",
-				"scores" : [
-				 ]
-			 },
+				"name": "yellow"
+			},
 			{
-				"name" : "grey",
-				"scores" : [
-				 ]
-			 },
+				"name": "grey"
+			},
 			{
-				"name" : "brown",
-				"scores" : [
-				 ]
-			 },
+				"name": "brown"
+			},
 			{
-				"name" : "white",
-				"scores" : [
-				 ]
-			 } ]
-	 },
+				"name": "white"
+			}
+		]
+	},
 	{
-		"name" : "beak",
-		"description" : "shape of beak",
-		"options" : [
+		"name": "beak",
+		"description": "shape of beak",
+		"options": [
 			{
-				"name" : "pointed",
-				"scores" : [
-				 ]
-			 },
+				"name": "generalist"
+			},
 			{
-				"name" : "finchy",
-				"scores" : [
-				 ]
-			 } ]
-	 } ]
+				"name": "insect catching"
+			},
+			{
+				"name": "grain eating"
+			}
+		]
+	}
+]

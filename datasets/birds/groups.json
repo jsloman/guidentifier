@@ -1,314 +1,352 @@
 {
-	"category.name" : "birds",
-	"groups" : [
+	"category.name": "birds",
+	"groups": [
 		{
-			"name" : "palaeognathae",
-			"groups" : [
+			"name": "palaeognathae",
+			"groups": [
 				{
-					"name" : "struthioniformes",
-					"description" : "ostriches",
-					"groups" : [
+					"name": "struthioniformes",
+					"description": "ostriches",
+					"groups": [
 						{
-							"name" : "struthio",
-							"description" : "ostriches",
-							"things" : [
+							"name": "struthio",
+							"description": "ostriches",
+							"identifiers": [
 								{
-									"name" : "struthio camelus",
-									"description" : "common ostrich" },
+									"name": "size",
+									"scores": [
+										{
+											"option": "huge",
+											"score": 100
+										}
+									]
+								}
+							],
+							"things": [
 								{
-									"name" : "struthio molybdophanes",
-									"description" : "Somali ostrich" } ]
-						 } ]
-				 },
+									"name": "struthio camelus",
+									"description": "common ostrich"
+								},
+								{
+									"name": "struthio molybdophanes",
+									"description": "Somali ostrich"
+								}
+							]
+						}
+					]
+				},
 				{
-					"name" : "rheiformes",
-					"description" : "rheas" },
+					"name": "rheiformes",
+					"description": "rheas"
+				},
 				{
-					"name" : "tinamiformes",
-					"description" : "tinamous" },
+					"name": "tinamiformes",
+					"description": "tinamous"
+				},
 				{
-					"name" : "casuariformes",
-					"description" : "emus and cassowaries" },
+					"name": "casuariformes",
+					"description": "emus and cassowaries"
+				},
 				{
-					"name" : "apterygiformes",
-					"description" : "kiwis" } ]
-		 },
+					"name": "apterygiformes",
+					"description": "kiwis"
+				}
+			]
+		},
 		{
-			"name" : "neognathae",
-			"groups" : [
+			"name": "neognathae",
+			"groups": [
 				{
-					"name" : "galloanserae",
-					"description" : "fowls",
-					"groups" : [
+					"name": "galloanserae",
+					"description": "fowls",
+					"groups": [
 						{
-							"name" : "galliformes",
-							"description" : "game birds" },
+							"name": "galliformes",
+							"description": "game birds"
+						},
 						{
-							"name" : "anseriformes",
-							"description" : "waterfowls" } ]
-				 },
+							"name": "anseriformes",
+							"description": "waterfowls"
+						}
+					]
+				},
 				{
-					"name" : "neoaves",
-					"groups" : [
+					"name": "neoaves",
+					"groups": [
 						{
-							"name" : "columbea",
-							"groups" : [
+							"name": "columbea",
+							"groups": [
 								{
-									"name" : "columbimorphae",
-									"groups" : [
+									"name": "columbimorphae",
+									"groups": [
 										{
-											"name" : "columbiformes",
-											"description" : "pigeons and doves",
-											"things" : [
-											 ]
-										 },
+											"name": "columbiformes",
+											"description": "pigeons and doves",
+											"things": [
+											]
+										},
 										{
-											"name" : "pteroclidiformes",
-											"description" : "sandgrouses",
-											"things" : [
-											 ]
-										 },
+											"name": "pteroclidiformes",
+											"description": "sandgrouses",
+											"things": [
+											]
+										},
 										{
-											"name" : "mesitornithiformes",
-											"description" : "mesites",
-											"things" : [
-											 ]
-										 } ]
-								 },
+											"name": "mesitornithiformes",
+											"description": "mesites",
+											"things": [
+											]
+										}
+									]
+								},
 								{
-									"name" : "mirandornithes",
-									"groups" : [
+									"name": "mirandornithes",
+									"groups": [
 										{
-											"name" : "phoenicopteriformes",
-											"description" : "flamingos",
-											"things" : [
-											 ]
-										 },
+											"name": "phoenicopteriformes",
+											"description": "flamingos",
+											"things": [
+											]
+										},
 										{
-											"name" : "podicipediformes",
-											"description" : "grebes",
-											"things" : [
-											 ]
-										 } ]
-								 } ]
-						 },
+											"name": "podicipediformes",
+											"description": "grebes",
+											"things": [
+											]
+										}
+									]
+								}
+							]
+						},
 						{
-							"name" : "passerea",
-							"groups" : [
+							"name": "passerea",
+							"groups": [
 								{
-									"name" : "otidmorphae",
-									"groups" : [
+									"name": "otidmorphae",
+									"groups": [
 										{
-											"name" : "cuculiformes",
-											"description" : "cuckoos",
-											"things" : [
-											 ]
-										 },
+											"name": "cuculiformes",
+											"description": "cuckoos",
+											"things": [
+											]
+										},
 										{
-											"name" : "musophagiformes",
-											"description" : "turacos",
-											"things" : [
-											 ]
-										 },
+											"name": "musophagiformes",
+											"description": "turacos",
+											"things": [
+											]
+										},
 										{
-											"name" : "otidiformes",
-											"description" : "bustards",
-											"things" : [
-											 ]
-										 } ]
-								 },
+											"name": "otidiformes",
+											"description": "bustards",
+											"things": [
+											]
+										}
+									]
+								},
 								{
-									"name" : "strisores",
-									"groups" : [
+									"name": "strisores",
+									"groups": [
 										{
-											"name" : "caprimulgiformes",
-											"description" : "nightjars and relatives",
-											"things" : [
-											 ]
-										 },
+											"name": "caprimulgiformes",
+											"description": "nightjars and relatives",
+											"things": [
+											]
+										},
 										{
-											"name" : "steatonithiformes",
-											"description" : "oilbird",
-											"things" : [
-											 ]
-										 },
+											"name": "steatonithiformes",
+											"description": "oilbird",
+											"things": [
+											]
+										},
 										{
-											"name" : "podargiformes",
-											"description" : "frogmouths",
-											"things" : [
-											 ]
-										 },
+											"name": "podargiformes",
+											"description": "frogmouths",
+											"things": [
+											]
+										},
 										{
-											"name" : "apodiformes",
-											"description" : "swifts and hummingbirds",
-											"things" : [
-											 ]
-										 } ]
-								 },
+											"name": "apodiformes",
+											"description": "swifts and hummingbirds",
+											"things": [
+											]
+										}
+									]
+								},
 								{
-									"name" : "opisthocomiformes",
-									"description" : "hoatzin",
-									"things" : [
-									 ]
-								 },
+									"name": "opisthocomiformes",
+									"description": "hoatzin",
+									"things": [
+									]
+								},
 								{
-									"name" : "cursorimorphae",
-									"groups" : [
+									"name": "cursorimorphae",
+									"groups": [
 										{
-											"name" : "charadriiformes",
-											"description" : "gulls and relatives",
-											"things" : [
-											 ]
-										 },
+											"name": "charadriiformes",
+											"description": "gulls and relatives",
+											"things": [
+											]
+										},
 										{
-											"name" : "gruiformes",
-											"description" : "cranes and relatives",
-											"things" : [
-											 ]
-										 } ]
-								 },
+											"name": "gruiformes",
+											"description": "cranes and relatives",
+											"things": [
+											]
+										}
+									]
+								},
 								{
-									"name" : "phaethontimorphae",
-									"groups" : [
+									"name": "phaethontimorphae",
+									"groups": [
 										{
-											"name" : "phaethontiformes",
-											"description" : "tropicbirds",
-											"things" : [
-											 ]
-										 },
+											"name": "phaethontiformes",
+											"description": "tropicbirds",
+											"things": [
+											]
+										},
 										{
-											"name" : "eurypygiformes",
-											"description" : "kagu and sunbittern",
-											"things" : [
-											 ]
-										 } ]
-								 },
+											"name": "eurypygiformes",
+											"description": "kagu and sunbittern",
+											"things": [
+											]
+										}
+									]
+								},
 								{
-									"name" : "aequornithes",
-									"groups" : [
+									"name": "aequornithes",
+									"groups": [
 										{
-											"name" : "gaviiformes",
-											"description" : "loons and divers",
-											"things" : [
-											 ]
-										 },
+											"name": "gaviiformes",
+											"description": "loons and divers",
+											"things": [
+											]
+										},
 										{
-											"name" : "sphenisciformes",
-											"description" : "penguins",
-											"things" : [
-											 ]
-										 },
+											"name": "sphenisciformes",
+											"description": "penguins",
+											"things": [
+											]
+										},
 										{
-											"name" : "procellariiformes",
-											"description" : "albatrosses and petrels",
-											"things" : [
-											 ]
-										 },
+											"name": "procellariiformes",
+											"description": "albatrosses and petrels",
+											"things": [
+											]
+										},
 										{
-											"name" : "ciconiiformes",
-											"description" : "storks",
-											"things" : [
-											 ]
-										 },
+											"name": "ciconiiformes",
+											"description": "storks",
+											"things": [
+											]
+										},
 										{
-											"name" : "suliformes",
-											"description" : "cormorants and relatives",
-											"things" : [
-											 ]
-										 },
+											"name": "suliformes",
+											"description": "cormorants and relatives",
+											"things": [
+											]
+										},
 										{
-											"name" : "pelecaniformes",
-											"description" : "pelicans and relatives",
-											"things" : [
-											 ]
-										 } ]
-								 },
+											"name": "pelecaniformes",
+											"description": "pelicans and relatives",
+											"things": [
+											]
+										}
+									]
+								},
 								{
-									"name" : "australaves",
-									"groups" : [
+									"name": "australaves",
+									"groups": [
 										{
-											"name" : "cariamiformes",
-											"description" : "seriemas and relatives",
-											"things" : [
-											 ]
-										 },
+											"name": "cariamiformes",
+											"description": "seriemas and relatives",
+											"things": [
+											]
+										},
 										{
-											"name" : "falconiformes",
-											"description" : "falcons and relatives",
-											"things" : [
-											 ]
-										 },
+											"name": "falconiformes",
+											"description": "falcons and relatives",
+											"things": [
+											]
+										},
 										{
-											"name" : "psittaciformes",
-											"description" : "parrots",
-											"things" : [
-											 ]
-										 },
+											"name": "psittaciformes",
+											"description": "parrots",
+											"things": [
+											]
+										},
 										{
-											"name" : "passeriformes",
-											"description" : "perching birds",
-											"includefile" : "passeriformes.json" } ]
-								 },
+											"name": "passeriformes",
+											"description": "perching birds",
+											"includefile": "passeriformes.json"
+										}
+									]
+								},
 								{
-									"name" : "afroaves",
-									"groups" : [
+									"name": "afroaves",
+									"groups": [
 										{
-											"name" : "cathartiformes",
-											"description" : "new world vultures and condors",
-											"things" : [
-											 ]
-										 },
+											"name": "cathartiformes",
+											"description": "new world vultures and condors",
+											"things": [
+											]
+										},
 										{
-											"name" : "accipitriformes",
-											"description" : "eagles and hawks",
-											"things" : [
-											 ]
-										 },
+											"name": "accipitriformes",
+											"description": "eagles and hawks",
+											"things": [
+											]
+										},
 										{
-											"name" : "strigiformes",
-											"description" : "owls",
-											"things" : [
-											 ]
-										 },
+											"name": "strigiformes",
+											"description": "owls",
+											"things": [
+											]
+										},
 										{
-											"name" : "coliiformes",
-											"description" : "mousebirds",
-											"things" : [
-											 ]
-										 },
+											"name": "coliiformes",
+											"description": "mousebirds",
+											"things": [
+											]
+										},
 										{
-											"name" : "trogoniformes",
-											"description" : "trogons and quetzals",
-											"things" : [
-											 ]
-										 },
+											"name": "trogoniformes",
+											"description": "trogons and quetzals",
+											"things": [
+											]
+										},
 										{
-											"name" : "leptosomatiformes",
-											"description" : "cuckoo roller",
-											"things" : [
-											 ]
-										 },
+											"name": "leptosomatiformes",
+											"description": "cuckoo roller",
+											"things": [
+											]
+										},
 										{
-											"name" : "bucerotiformes",
-											"description" : "hornbills and hoopoes",
-											"things" : [
-											 ]
-										 },
+											"name": "bucerotiformes",
+											"description": "hornbills and hoopoes",
+											"things": [
+											]
+										},
 										{
-											"name" : "coraciiformes",
-											"description" : "kingfishers and rollers",
-											"things" : [
-											 ]
-										 },
+											"name": "coraciiformes",
+											"description": "kingfishers and rollers",
+											"things": [
+											]
+										},
 										{
-											"name" : "piciformes",
-											"description" : "woodpeckers and relatives",
-											"things" : [
-											 ]
-										 } ]
-								 } ]
-						 } ]
-				 } ]
-		 } ]
-	,
-	"identifierfile" : "identifiers.json" }
+											"name": "piciformes",
+											"description": "woodpeckers and relatives",
+											"things": [
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	],
+	"identifierfile": "identifiers.json"
+}

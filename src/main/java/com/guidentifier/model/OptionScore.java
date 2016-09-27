@@ -11,6 +11,7 @@ public class OptionScore {
 	@Id Long id;
 	@Index @Load Ref<IdentifierOption> identifierOption;
 	@Index @Load Ref<Thing> thing;
+	@Index @Load Ref<Group> group;
 	
 	// TOOD define range?
 	int value;
@@ -22,6 +23,12 @@ public class OptionScore {
 	public OptionScore(IdentifierOption identifierOption, Thing thing) {
 		this.identifierOption = Ref.create(identifierOption);
 		this.thing = Ref.create(thing);
+		id = null;
+	}
+	
+	public OptionScore(IdentifierOption identifierOption, Group group) {
+		this.identifierOption = Ref.create(identifierOption);
+		this.group = Ref.create(group);
 		id = null;
 	}
 
@@ -55,5 +62,13 @@ public class OptionScore {
 
 	public void setThing(Thing thing) {
 		this.thing = Ref.create(thing);
+	}
+	
+	public Group getGroup() {
+		return group.get();
+	}
+
+	public void setGroup(Group group) {
+		this.group = Ref.create(group);
 	}
 }
