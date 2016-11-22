@@ -1,5 +1,7 @@
-"use strict";
- 
+import * as React from "react";
+import * as ReactDOM from "react-dom"
+import Group from "./Group";
+
 var Category = React.createClass({
 	rawMarkup: function() {
 		var rawMarkup = marked(this.props.children.toString(), {sanitize: true});
@@ -120,7 +122,7 @@ var CategoryBox = React.createClass({
 	        <h1>Categories</h1>
 	        <CategoryList categories={this.state.categories} onCategorySelect={this.handleCategorySelect}/>
 	        <CategoryForm onCategorySubmit={this.handleCategorySubmit} />
-	        <GroupBox categoryName={this.state.categoryName} groups={this.state.groups} onGroupSubmit={this.handleGroupSubmit}/>
+	        <Group.GroupBox categoryName={this.state.categoryName} groups={this.state.groups} onGroupSubmit={this.handleGroupSubmit}/>
 	        </div>
 	    );
 	}
