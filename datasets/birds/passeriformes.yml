@@ -1,0 +1,128 @@
+---
+groups:
+- name: paridae
+  description: tits
+  identifiers:
+  - name: size
+    scores:
+    - option: small
+      score: 100
+    - option: tiny
+      score: 50
+  things:
+  - name: cyanistes caeruleus
+    description: eurasian blue tit
+    identifiers:
+    - name: colour
+      scores:
+      - option: yellow
+        score: 100
+      - option: blue
+        score: 50
+  - name: parus major
+    description: great tit
+    identifiers:
+    - name: colour
+      scores:
+      - option: yellow
+        score: 100
+      - option: black
+        score: 50
+  - name: periparus ater
+    description: coal tit
+    identifiers:
+    - name: colour
+      scores:
+      - option: grey
+        score: 100
+  - name: aegithalos caudatus
+    description: long-tailed tit
+    identifiers:
+    - name: colour
+      scores:
+      - option: grey
+        score: 100
+  - name: poecile palustris
+    description: marsh tit
+    identifiers:
+    - name: colour
+      scores:
+      - option: grey
+        score: 100
+      - option: black
+        score: 50
+- name: turdidae
+  description: thrushes
+  identifiers:
+  - name: size
+    scores:
+    - option: medium
+      score: 100
+  things:
+  - name: turdus merula
+    description: blackbird
+    identifiers:
+    - name: colour
+      scores:
+      - option: black
+        score: 100
+      - option: brown
+        score: 100
+  - name: turdus philomelos
+    description: song thrush
+    identifiers:
+    - name: colour
+      scores:
+      - option: brown
+        score: 100
+  - name: turdus viscivorus
+    description: mistle thrush
+    identifiers:
+    - name: colour
+      scores:
+      - option: brown
+        score: 100
+  - name: turdus iliacus
+    description: redwing
+    identifiers:
+    - name: colour
+      scores:
+      - option: brown
+        score: 100
+  - name: turdus pilaris
+    description: fieldfare
+    identifiers:
+    - name: colour
+      scores:
+      - option: brown
+        score: 100
+- name: passeridae
+  description: sparrows
+  identifiers:
+  - name: size
+    scores:
+    - option: small
+      score: 100
+  things:
+  - name: passer domesticus
+    description: house sparrow
+    identifiers:
+    - name: colour
+      scores:
+      - option: grey
+        score: 100
+- name: prunellidae
+  description: accentors
+  identifiers:
+  - name: size
+    scores:
+    - option: small
+      score: 100
+  things:
+  - name: prunella modularis
+    description: dunnock
+    identifiers:
+    - name: colour
+      scores:
+      - option: brown
+        score: 100

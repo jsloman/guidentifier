@@ -1,0 +1,32 @@
+---
+- name: size
+  description: overall size of bird
+  options:
+  - name: tiny
+  - name: small
+  - name: medium
+  - name: large
+  - name: huge
+  identifiers:
+  - name: wingspan
+    description: span of outstretched wings
+    options:
+    - name: tiny
+    - name: small
+    - name: medium
+    - name: large
+    - name: huge
+- name: colour
+  description: overall colour of bird
+  options:
+  - name: black
+  - name: yellow
+  - name: grey
+  - name: brown
+  - name: white
+- name: beak
+  description: shape of beak
+  options:
+  - name: generalist
+  - name: insect catching
+  - name: grain eating
